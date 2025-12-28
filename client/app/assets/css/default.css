@@ -1,0 +1,18 @@
+* {
+    font-family: "iransans";
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    direction: rtl;
+    @apply bg-custom-whitesmoke;
+}
+
+.bg-pattern {
+    background: linear-gradient(27.5deg, #0f93ff, #1596ff 25%, #219bff 0, #1a98ff 40%, #0f93ff 0, #219bff 52%, #0f93ff 0, #0f93ff);
+}
+
+.Toastify__toast {
+    @apply !rounded-xl text-sm !shadow-none border
+}

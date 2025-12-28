@@ -1,0 +1,7 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="c-nav-desktop-drawer__sub-link__icon" width="64"  height="64" ><defs><symbol xmlns="http://www.w3.org/2000/svg" id="roaming" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M8.13 15.5a3.9 3.9 0 0 0 2.02 2.9 8 8 0 0 1-.64-2.9zm5.72-4c.35.77.58 1.78.64 2.9h1.38a3.9 3.9 0 0 0-2.02-2.9m-5.72 2.9H9.5c.06-1.11.28-2.12.64-2.9a3.9 3.9 0 0 0-2.02 2.9"></path>
+    <path fill-rule="evenodd" d="M12.57 2.03H7.45a2.93 2.93 0 0 0-2.93 2.93v14.08a2.9 2.9 0 0 0 2.93 2.93h9.1a2.93 2.93 0 0 0 2.93-2.93V8.81zm-2.4 1.6 1.22 2.12h-.6v2.3H9.55v-2.3h-.6zM7.15 6.07v-2.3h1.26v2.3h.6L7.78 8.18 6.56 6.06zM12 19.97a5.03 5.03 0 1 1 .01-10.06A5.03 5.03 0 0 1 12 19.97"></path>
+    <path fill-rule="evenodd" d="M13.85 18.4a3.9 3.9 0 0 0 2.02-2.9H14.5a8 8 0 0 1-.64 2.9m-1.86.46c.51 0 1.26-1.27 1.38-3.36h-2.76c.12 2.1.87 3.36 1.38 3.36m0-7.83c-.5 0-1.26 1.3-1.38 3.36h2.76c-.12-2.09-.87-3.36-1.38-3.36"></path>
+  </symbol></defs>
+                                        <use xlink:href="#roaming"></use>
+                                    </svg>

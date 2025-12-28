@@ -1,0 +1,5 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="c-nav-desktop-drawer__root-link__icon" width="32"  height="32" ><defs><symbol xmlns="http://www.w3.org/2000/svg" id="categoryTravel" viewBox="0 0 24 24">
+    <path d="M19.23 9.57a4.1 4.1 0 0 0-4.07-3.71h-.27V4.67A2.67 2.67 0 0 0 12.23 2h-.44a2.67 2.67 0 0 0-2.66 2.67v1.19h-.27a4.1 4.1 0 0 0-4.07 3.71l-.52 5.82a4.1 4.1 0 0 0 3.13 4.35v1.59a.67.67 0 0 0 1.34 0v-1.48h6.52v1.48a.67.67 0 0 0 1.34 0v-1.59a4.1 4.1 0 0 0 3.13-4.35l-.52-5.82zm-9.24 6.46a.67.67 0 0 1-1.34 0v-5.62a.67.67 0 0 1 1.34 0zm2.7 0a.67.67 0 0 1-1.34 0v-5.62a.67.67 0 0 1 1.34 0zm.86-10.17h-3.08V4.67c0-.73.59-1.32 1.32-1.32h.44c.73 0 1.32.59 1.32 1.32zm1.84 10.17a.67.67 0 0 1-1.34 0v-5.62a.67.67 0 0 1 1.34 0z"></path>
+  </symbol></defs>
+                            <use xlink:href="#categoryTravel"></use>
+                        </svg>

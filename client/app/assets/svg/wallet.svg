@@ -1,0 +1,5 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="c-nav-desktop__profile-popup__action__icon" aria-hidden="true" width="24"  height="24" ><defs><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="iconWallet">
+    <path d="M17.76 7.28h-.12V6.21a4.2 4.2 0 0 0-1.32-3.06 4.2 4.2 0 0 0-3.16-1.1l-8.23.61a3.1 3.1 0 0 0-2.85 3.08v12.04c0 2.3 1.87 4.18 4.16 4.18h11.52a4.17 4.17 0 0 0 4.16-4.18v-6.34c0-2.3-1.87-4.15-4.16-4.15ZM5.04 4.2l8.23-.62h.2a2.64 2.64 0 0 1 2.64 2.62v1.08H5.16a1.55 1.55 0 0 1-.12-3.09Zm15.36 9.6h-2a.76.76 0 0 0 0 1.52h2v2.45a2.64 2.64 0 0 1-2.63 2.65H6.25a2.64 2.64 0 0 1-2.64-2.65V8.4q.7.4 1.55.42h12.6a2.63 2.63 0 0 1 2.63 2.63z"></path>
+  </symbol></defs>
+            <use xlink:href="#iconWallet"></use>
+          </svg>

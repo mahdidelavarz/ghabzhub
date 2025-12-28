@@ -1,0 +1,6 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="c-nav-desktop__btns-icon-wrapper" aria-hidden="true" width="32"  height="32" ><defs><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="iconShopping">
+    <path d="M21.22 9.3h-1.97l-.57-3.7a3.9 3.9 0 0 0-3.88-3.33H9.18A3.9 3.9 0 0 0 5.3 5.6l-.57 3.7H2.78a.76.76 0 0 0 0 1.51h.4l.48 7.26a3.94 3.94 0 0 0 3.92 3.66h8.85a3.94 3.94 0 0 0 3.91-3.66l.49-7.26h.4a.76.76 0 0 0 0-1.51Zm-14.96 0 .54-3.47a2.4 2.4 0 0 1 2.38-2.04h5.62a2.4 2.4 0 0 1 2.38 2.04l.54 3.47zm12.53 8.73a2.4 2.4 0 0 1-2.39 2.19H7.55a2.4 2.4 0 0 1-2.4-2.24l-.46-7.16h14.58l-.48 7.16z"></path>
+    <rect width="1.5" height="7.71" x="11.23" y="13.3" rx=".75" ry=".75" transform="rotate(-90 11.98 17.16)"></rect>
+  </symbol></defs>
+          <use xlink:href="#iconShopping"></use>
+        </svg>
