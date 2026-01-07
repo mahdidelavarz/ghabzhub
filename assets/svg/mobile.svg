@@ -1,0 +1,5 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="c-nav-desktop-drawer__sub-link__icon" width="64"  height="64" ><defs><symbol xmlns="http://www.w3.org/2000/svg" id="mobile" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M15.2 2.02H8.8a3 3 0 0 0-3 3v13.97a3 3 0 0 0 3 3h6.42a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3M9.17 5.18c0-.37.3-.67.67-.67h2.14a.67.67 0 1 1 0 1.34H9.83a.67.67 0 0 1-.67-.67m4.41 14.98h-3.14a.67.67 0 1 1 0-1.34h3.14a.67.67 0 1 1 0 1.34m.59-14.3c-.37 0-.67-.3-.67-.68s.3-.67.67-.67.67.3.67.67-.3.68-.67.68"></path>
+  </symbol></defs>
+                                        <use xlink:href="#mobile"></use>
+                                    </svg>

@@ -1,0 +1,5 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="c-home-header__category__icon c-home-header__category__icon--vehicle" aria-hidden="true" width="40"  height="40" ><defs><symbol xmlns="http://www.w3.org/2000/svg" id="categoryVehicleWhite" viewBox="0 0 24 24">
+    <path d="m20.38 10.01 1.13-.42c.35-.11.53-.5.4-.85a.67.67 0 0 0-.87-.4l-1.31.48-.9-1.76a4.6 4.6 0 0 0-4.13-2.53H9.3c-1.73 0-3.33.97-4.12 2.53l-.9 1.76-1.32-.48a.67.67 0 0 0-.86.4c-.13.35.05.74.4.85l1.13.42a4 4 0 0 0-1.57 3.16v4.32c0 .94.63 1.8 1.56 1.95 1.18.2 2.2-.7 2.2-1.85v-1.04h12.37v1.04a1.87 1.87 0 0 0 2.2 1.85c.92-.15 1.56-1.01 1.56-1.95v-4.32a4 4 0 0 0-1.57-3.16M8.46 14.36H6.49c-.37 0-.68-.3-.68-.67s.31-.67.68-.67h1.97c.37 0 .68.3.68.67s-.31.67-.68.67m9.05 0h-1.97a.67.67 0 0 1 0-1.34h1.97c.37 0 .68.3.68.67s-.31.67-.68.67M5.64 9.09l.73-1.42a3.3 3.3 0 0 1 2.93-1.8h5.4c1.24 0 2.36.7 2.93 1.8l.73 1.42z"></path>
+  </symbol></defs>
+        <use xlink:href="#categoryVehicleWhite"></use>
+      </svg>

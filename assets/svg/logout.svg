@@ -1,0 +1,6 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="c-nav-desktop__profile-popup__action__icon" aria-hidden="true" width="24"  height="24" ><defs><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="iconLogout">
+    <path d="M15.82 10.45v-4.7a3.73 3.73 0 0 0-3.76-3.74H6.3a3.74 3.74 0 0 0-3.76 3.75v12.48a3.7 3.7 0 0 0 2.33 3.46q.68.3 1.43.29h5.79a3.73 3.73 0 0 0 3.74-3.75v-4.7h-1.5v4.7a2.25 2.25 0 0 1-2.25 2.25H6.29a2.24 2.24 0 0 1-2.22-2.25V5.76A2.25 2.25 0 0 1 6.3 3.5h5.78a2.25 2.25 0 0 1 2.25 2.25v4.7z"></path>
+    <path d="M21.4 11.62a1 1 0 0 0-.17-.25L19.3 9.45a.8.8 0 0 0-.53-.23h-.02a.76.76 0 0 0-.55 1.28l.7.68H11a.74.74 0 0 0-.74.74.75.75 0 0 0 .74.75h7.8l-.63.63a.8.8 0 0 0-.24.55.8.8 0 0 0 .24.55q.22.2.51.2h.01l.08.01q.26 0 .47-.15l1.98-1.99a.7.7 0 0 0 .25-.55q0-.16-.06-.3Z"></path>
+  </symbol></defs>
+            <use xlink:href="#iconLogout"></use>
+          </svg>

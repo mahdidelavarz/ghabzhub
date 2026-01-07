@@ -1,0 +1,92 @@
+@import "tailwindcss";
+@import "../assets/css/fonts.css";
+@import "../assets/css/default.css";
+
+* {
+  font-family: "iransans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.bg-custom-blue {
+  background-color: #0078d7;
+}
+
+.bg-custom-green {
+  background-color: #35c759;
+}
+
+.bg-custom-orange {
+  background-color: #ffa94d;
+}
+
+.bg-custom-white {
+  background-color: #ffffff;
+}
+
+.bg-custom-whitesmoke {
+  background-color: #f9f9f9;
+}
+
+.bg-custom-neutral {
+  background-color: #2e2e2e;
+}
+
+.bg-custom-cyan {
+  background-color: #00bfa6;
+}
+
+.text-custom-blue {
+  color: #0078d7;
+}
+
+.text-custom-green {
+  color: #35c759;
+}
+
+.text-custom-orange {
+  color: #ffa94d;
+}
+
+.text-custom-white {
+  color: #ffffff;
+}
+
+.text-custom-neutral {
+  color: #2e2e2e;
+}
+
+.text-custom-cyan {
+  color: #00bfa6;
+}
+
+.header {
+  background: linear-gradient(
+    27.5deg,
+    #0f93ff,
+    #1596ff 25%,
+    #219bff 0,
+    #1a98ff 40%,
+    #0f93ff 0,
+    #219bff 52%,
+    #0f93ff 0,
+    #0f93ff
+  );
+}
+
+.menu-header {
+  background: linear-gradient(
+    27.5deg,
+    #0f93ff,
+    #1596ff 25%,
+    #219bff 0,
+    #1a98ff 40%,
+    #0f93ff 0,
+    #219bff 52%,
+    #0f93ff 0,
+    #0f93ff
+  );
+  padding: 0.75rem;
+  border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+}
+

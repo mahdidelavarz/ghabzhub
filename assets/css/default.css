@@ -1,0 +1,21 @@
+* {
+    font-family: "iransans";
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    direction: rtl;
+    background-color: #f9f9f9;
+}
+
+.bg-pattern {
+    background: linear-gradient(27.5deg, #0f93ff, #1596ff 25%, #219bff 0, #1a98ff 40%, #0f93ff 0, #219bff 52%, #0f93ff 0, #0f93ff);
+}
+
+.Toastify__toast {
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    box-shadow: none !important;
+    border: 1px solid rgba(226, 232, 240, 0.7);
+}

@@ -1,0 +1,5 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="c-nav-desktop-drawer__sub-link__icon" width="64"  height="64" ><defs><symbol xmlns="http://www.w3.org/2000/svg" id="paperBill" viewBox="0 0 24 24">
+    <path d="M16.39 2.02h-8.8a3.1 3.1 0 0 0-3.1 3.08v15.71a1.17 1.17 0 0 0 1.18 1.17q.35 0 .66-.2l1.92-1.33c.35-.24.8-.24 1.17 0l1.91 1.32q.3.2.66.21c.36.01.47-.07.67-.2l1.92-1.33c.35-.24.8-.24 1.17 0l1.91 1.32q.3.2.66.21.29 0 .55-.13c.4-.2.63-.6.63-1.04V5.11a3.1 3.1 0 0 0-3.09-3.1zm-.86 12.21h-4.21a.67.67 0 1 1 0-1.34h4.21a.67.67 0 1 1 0 1.34m0-3.2H8.44a.67.67 0 1 1 0-1.33h7.09a.67.67 0 1 1 0 1.34m0-3.18H8.44a.67.67 0 1 1 0-1.34h7.09a.67.67 0 1 1 0 1.34"></path>
+  </symbol></defs>
+                                        <use xlink:href="#paperBill"></use>
+                                    </svg>
