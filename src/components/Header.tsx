@@ -14,11 +14,11 @@ export function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const offsetClass = scrollOnTarget ? '-translate-y-12' : '';
+  const offsetClass = scrollOnTarget ? '-translate-y-30 md:translate-y-12' : '';
 
   return (
     <div
-      className={`container mx-auto z-10 my-18 sticky top-0 left-0 transition duration-500 ${offsetClass}`}
+      className={`container mx-auto z-10 mb-18 md:mb-0 md:my-18 sticky top-0 left-0 transition duration-500 ${offsetClass}`}
     >
       <div className="px-6 pt-7 header rounded-b-[50px] text-center">
         <div className="md:hidden inline-block mb-3 text-4xl text-custom-white">
@@ -26,7 +26,7 @@ export function Header() {
         </div>
         <h1 className="text-custom-white md:text-2xl font-bold">
           <span className="hidden md:inline-block mb-3 text-4xl text-custom-white">
-            <Logo />
+            <Logo className='ml-10'/>
           </span>
           سامانه پرداخت قبض <span className="text-2xl">هوشمند</span>
         </h1>
