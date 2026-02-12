@@ -1,0 +1,7 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="c-nav-desktop-drawer__sub-link__icon" width="64"  height="64" ><defs><symbol xmlns="http://www.w3.org/2000/svg" id="passport" viewBox="0 0 24 24">
+    <path fill-rule="evenodd" d="M12 15c.48 0 1.18-1.39 1.28-3.5h-2.56c.1 2.11.8 3.5 1.28 3.5m0-7.98c-.48 0-1.18 1.37-1.28 3.49h2.56C13.18 8.38 12.48 7 12 7m-3.94 3.5h1.66c.05-1.16.27-2.3.66-3.14a4 4 0 0 0-2.32 3.14m0 1a4 4 0 0 0 2.32 3.14 8 8 0 0 1-.66-3.14z"></path>
+    <path fill-rule="evenodd" d="M17.48 2.03H6.52a2 2 0 0 0-2 2v15.95q0 .4.15.74a2 2 0 0 0 1.85 1.25H17.2a1 1 0 0 0 1-1v-.24H6.37a.5.5 0 0 1-.5-.5v-.27c0-.28.22-.5.5-.5h11.11a2 2 0 0 0 2-2V4.03a2 2 0 0 0-2-1.99M12 15.99a4.99 4.99 0 1 1 0-9.97 4.99 4.99 0 0 1 0 9.97"></path>
+    <path fill-rule="evenodd" d="M13.62 14.64a4 4 0 0 0 2.32-3.14h-1.66a9 9 0 0 1-.66 3.14m0-7.28c.4.84.61 1.98.66 3.14h1.66a4 4 0 0 0-2.33-3.14"></path>
+  </symbol></defs>
+                                        <use xlink:href="#passport"></use>
+                                    </svg>

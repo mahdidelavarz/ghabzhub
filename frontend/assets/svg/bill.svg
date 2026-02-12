@@ -1,0 +1,6 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" class="c-nav-mobile-drawer__root-link__icon" aria-hidden="true" width="24"  height="24" ><defs><symbol xmlns="http://www.w3.org/2000/svg" id="categoryBill" viewBox="0 0 24 24">
+    <path d="M20.15 3.32c1 0 1.8.8 1.8 1.8v4.84a.5.5 0 0 1-.51.52h-2.58a.5.5 0 0 1-.51-.52V5.12c0-1 .8-1.8 1.8-1.8"></path>
+    <path d="M6.16 2.09a4.1 4.1 0 0 0-4.1 4.1v14.55a1.17 1.17 0 0 0 1.83.96l1.9-1.3c.35-.24.82-.24 1.16 0l1.9 1.3a1.2 1.2 0 0 0 1.33 0l1.9-1.3c.35-.24.81-.24 1.16 0l1.9 1.3a1.2 1.2 0 0 0 1.2.08c.39-.2.63-.6.63-1.04V5.43a3.5 3.5 0 0 1 2.5-3.34zm6.72 13.4H8.34a.69.69 0 1 1 0-1.37h4.54a.69.69 0 1 1 0 1.37m0-3.62H6.16a.69.69 0 1 1 0-1.37h6.72a.69.69 0 1 1 0 1.37m0-3.63H6.16a.69.69 0 1 1 0-1.37h6.72a.69.69 0 1 1 0 1.37"></path>
+  </symbol></defs>
+                            <use xlink:href="#categoryBill"></use>
+                        </svg>
