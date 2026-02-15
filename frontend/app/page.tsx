@@ -1,6 +1,7 @@
-import { BillingList } from "@/src/components/BillingList";
-import { Header } from "@/src/components/Header";
-import { NavBar } from "@/src/components/NavBar";
+import { BillingList } from "@/components/BillingList";
+import { Header } from "@/components/Header";
+import { NavBar } from "@/components/NavBar";
+
 
 export default function Home() {
   return (
