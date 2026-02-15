@@ -2,7 +2,8 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { API } from '../../config/api';  // ✅ named import
+
+const API = process.env.NEXT_PUBLIC_URL;
 
 export default function LoginPage() {
   const router = useRouter();
@@ -17,44 +18,38 @@ export default function LoginPage() {
     setMessage('');
 
     try {
-      const res = await fetch(API.AUTH.LOGIN, {
+      const res = await fetch(`${API}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // required if backend sets httpOnly cookie
         body: JSON.stringify({
           mobile_number: mobile,
           password,
         }),
       });
 
-      const data = await res.json();
       setLoading(false);
 
-      if (res.ok && data.access_token) {
-        localStorage.setItem('access_token', data.access_token);
+      if (res.ok) {
         router.push('/');
       } else {
-        const msg =
-          typeof data.detail === 'string'
-            ? data.detail
-            : Array.isArray(data.detail)
-            ? data.detail.map((e: any) => e.msg).join(', ')
-            : 'Login failed';
-        setMessage(msg);
+        const data = await res.json();
+        setMessage(data.detail || 'Login failed');
       }
     } catch {
       setLoading(false);
-      setMessage('مشکلی پیش آمد');
+      setMessage('Something went wrong');
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-xl shadow w-96 space-y-4">
-        <h1 className="text-xl font-bold text-center">ورود به حساب کاربری</h1>
+        <h1 className="text-2xl font-bold text-center">Login</h1>
 
         <input
           type="text"
-          placeholder="شماره موبایل"
+          placeholder="Mobile Number"
           className="w-full border p-2 rounded"
           value={mobile}
           onChange={(e) => setMobile(e.target.value)}
@@ -62,7 +57,7 @@ export default function LoginPage() {
 
         <input
           type="password"
-          placeholder="رمز عبور"
+          placeholder="Password"
           className="w-full border p-2 rounded"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -73,20 +68,12 @@ export default function LoginPage() {
           disabled={loading}
           className="w-full bg-black text-white py-2 rounded"
         >
-          {loading ? 'در حال ورود...' : 'ورود'}
+          {loading ? 'Logging in...' : 'Login'}
         </button>
 
         {message && (
           <p className="text-red-500 text-sm text-center">{message}</p>
         )}
-
-        {/* ✅ Link to register */}
-        <p
-          className="text-sm text-center text-blue-500 cursor-pointer hover:underline"
-          onClick={() => router.push('/register')}
-        >
-          اگر ثبت نام نکرده‌اید، اینجا کلیک کنید
-        </p>
       </div>
     </div>
   );
