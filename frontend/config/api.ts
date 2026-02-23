@@ -14,7 +14,8 @@ export const API = {
     LOGIN: `${API_BASE}/auth/login`,
     VERIFY_OTP: `${API_BASE}/auth/verify-otp`,
     SEND_OTP: `${API_BASE}/auth/send-otp`,
-    COMPLETE_PROFILE: `${API_BASE}/auth/profile`,
-    PROFILE: `${API_BASE}/auth/me`,
+    COMPLETE_PROFILE: `${API_BASE}/profile`,
+    LOGOUT: `${API_BASE}/auth/logout`,
+    PROFILE: `${API_BASE}/me`,
   },
 };

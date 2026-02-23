@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { API } from "@/config/api";
+import toast from "react-hot-toast";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -30,13 +31,17 @@ export default function RegisterPage() {
       setLoading(false);
 
       if (res.ok && data.requires_verification) {
+        toast.success("ثبت نام موفق بود. کد تایید ارسال شد");
         router.push(`/verify-otp?mobile=${mobile}`);
       } else {
-        setMessage(data.detail || "Registration failed");
+        const errorMessage = data.detail || "Registration failed";
+        setMessage(errorMessage);
+        toast.error(errorMessage);
       }
     } catch {
       setLoading(false);
       setMessage("Something went wrong");
+      toast.error("Something went wrong");
     }
   };
 

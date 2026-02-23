@@ -1,31 +1,35 @@
-"use client"
-import { useMemo, useState } from 'react';
-import { Icon } from './Icon';
-import { services, type ServiceCategoryId } from './types/services';
+"use client";
 
+import { useMemo, useState } from "react";
+import { Icon } from "./Icon";
+import { services } from "./types/services";
+import { useAuthStore } from "@/features/auth/store/authStore";
+import { useLogout } from "@/features/auth/hooks/useLogout";
 
 export function NavMobile() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const user = useAuthStore((s) => s.user);
+  const logoutMutation = useLogout();
 
   const bottomNav = useMemo(
     () => [
-      { label: 'خانه', to: '/', icon: 'home' as const },
-      { label: 'سوابق', to: '/history', icon: 'wallet' as const },
-      { label: 'سبد قبض', to: '/shopping', icon: 'shopping' as const },
-      { label: 'منو', to: '?o=1', icon: 'app' as const, isMenu: true },
+      { label: "خانه", to: "/", icon: "home" as const },
+      { label: "سوابق", to: "/history", icon: "wallet" as const },
+      { label: "سبد قبض", to: "/shopping", icon: "shopping" as const },
+      { label: "منو", to: "?o=1", icon: "app" as const, isMenu: true },
     ],
     []
   );
 
   const moreLinks = useMemo(
     () => [
-      { label: 'کیف پول من', to: '/wallet', icon: 'wallet' as const },
-      { label: 'تراکنش های کیف پول', to: '/wallet', icon: 'bank' as const },
-      { label: 'قبض های پرداخت شده', to: '/bills', icon: 'bill' as const },
-      { label: 'پشتیبانی', to: '/support', icon: 'support' as const },
-      { label: 'بلاگ', to: '/blog', icon: 'blog' as const },
-      { label: 'نسخه سازمانی', to: '/org', icon: 'accessTime' as const },
-      { label: 'خروج از حساب کاربری', to: '/logout', icon: 'logout' as const },
+      { label: "کیف پول من", to: "/wallet", icon: "wallet" as const },
+      { label: "تراکنش های کیف پول", to: "/wallet", icon: "bank" as const },
+      { label: "قبض های پرداخت شده", to: "/bills", icon: "bill" as const },
+      { label: "پشتیبانی", to: "/support", icon: "support" as const },
+      { label: "بلاگ", to: "/blog", icon: "blog" as const },
+      { label: "نسخه سازمانی", to: "/org", icon: "accessTime" as const },
+      { label: "خروج از حساب کاربری", to: "/logout", icon: "logout" as const },
     ],
     []
   );
@@ -59,10 +63,9 @@ export function NavMobile() {
         </ul>
       </nav>
 
-      {/* Menu DropDown */}
       <div
         className={`fixed lg:hidden pb-28 z-20 top-0 left-0 w-full opacity-0 transition h-screen overflow-y-auto bg-custom-white translate-x-full ${
-          menuIsOpen ? 'opacity-100 !translate-x-0' : ''
+          menuIsOpen ? "opacity-100 !translate-x-0" : ""
         }`}
       >
         <div className="menu-header">
@@ -80,13 +83,12 @@ export function NavMobile() {
             />
             <div className="flex items-center w-full justify-between px-2 py-1">
               <p className="text-custom-white text-xl font-bold">
-                کاربر مهمان
+                {user?.name || user?.mobile_number || "کاربر مهمان"}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Services */}
         <ul className="mt-3">
           {services.categories.map((service) => {
             const items = services[service.id];
@@ -109,11 +111,7 @@ export function NavMobile() {
                       key={item.label}
                       className="p-2 bg-custom-whitesmoke rounded-2xl grid place-items-center text-center"
                     >
-                      <Icon
-                        name={item.icon as any}
-                        size={30}
-                        color={service.color}
-                      />
+                      <Icon name={item.icon as any} size={30} color={service.color} />
                       <p className="text-xs">{item.label}</p>
                     </li>
                   ))}
@@ -128,10 +126,25 @@ export function NavMobile() {
         <ul className="mt-3">
           {moreLinks.map((item) => (
             <li key={item.label} className="p-3 transition group hover:scale-95">
-              <a href={item.to} className="flex items-center gap-3">
-                <Icon name={item.icon as any} size={40} className="p-2 rounded-2xl" />
-                <p className="text-lg">{item.label}</p>
-              </a>
+              {item.icon === "logout" ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMenuIsOpen(false);
+                    logoutMutation.mutate();
+                  }}
+                  className="flex items-center gap-3 w-full text-right"
+                  disabled={logoutMutation.isPending}
+                >
+                  <Icon name={item.icon as any} size={40} className="p-2 rounded-2xl" />
+                  <p className="text-lg">{item.label}</p>
+                </button>
+              ) : (
+                <a href={item.to} className="flex items-center gap-3">
+                  <Icon name={item.icon as any} size={40} className="p-2 rounded-2xl" />
+                  <p className="text-lg">{item.label}</p>
+                </a>
+              )}
             </li>
           ))}
         </ul>

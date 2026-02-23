@@ -2,6 +2,7 @@
 import { useMutation } from "@tanstack/react-query";
 
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { useAuthStore } from "../store/authStore";
 import { logoutApi } from "../services/logout";
 
@@ -13,7 +14,12 @@ export function useLogout() {
     mutationFn: logoutApi,
     onSuccess: () => {
       clearUser();
+      localStorage.removeItem("access_token");
+      toast.success("از حساب کاربری خارج شدید");
       router.push("/login");
+    },
+    onError: () => {
+      toast.error("خروج از حساب ناموفق بود");
     },
   });
 }

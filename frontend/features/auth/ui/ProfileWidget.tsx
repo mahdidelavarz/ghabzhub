@@ -5,9 +5,11 @@ import { useRouter } from "next/navigation";
 
 import { Icon } from "@iconify/react";
 import { useLogout } from "../hooks/useLogout";
+import { useProfileQuery } from "../hooks/useProfileQuery";
 import { useAuthStore } from "../store/authStore";
 
 export function ProfileWidget() {
+  useProfileQuery();
   const user = useAuthStore((s) => s.user);
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);

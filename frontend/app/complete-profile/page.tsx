@@ -1,25 +1,43 @@
-// app/complete-profile/page.tsx
 "use client";
 
 import { useState } from "react";
 import { useCompleteProfile } from "@/features/auth/hooks/useCompleteProfile";
 import { useAuthStore } from "@/features/auth/store/authStore";
+import { useProfileQuery } from "@/features/auth/hooks/useProfileQuery";
 
 export default function CompleteProfilePage() {
   const { mutate, isPending, error } = useCompleteProfile();
   const user = useAuthStore((s) => s.user);
+  const { data: profileData } = useProfileQuery();
 
   const [name, setName] = useState("");
   const [familyName, setFamilyName] = useState("");
+  const [message, setMessage] = useState("");
+
+  const mobileNumber = user?.mobile_number || profileData?.mobile_number || "";
 
   const submit = () => {
-    if (!user?.mobile_number) return;
+    setMessage("");
 
-    mutate({
-      name,
-      family_name: familyName,
-      mobile_number: user.mobile_number,
-    });
+    if (!name.trim() || !familyName.trim()) {
+      setMessage("نام و نام خانوادگی را وارد کنید.");
+      return;
+    }
+
+    const payload: {
+      name: string;
+      family_name: string;
+      mobile_number?: string;
+    } = {
+      name: name.trim(),
+      family_name: familyName.trim(),
+    };
+
+    if (mobileNumber) {
+      payload.mobile_number = mobileNumber;
+    }
+
+    mutate(payload);
   };
 
   return (
@@ -44,7 +62,7 @@ export default function CompleteProfilePage() {
         <button
           onClick={submit}
           disabled={isPending}
-          className="w-full bg-black text-white py-2 rounded"
+          className="w-full bg-black text-white py-2 rounded disabled:opacity-60"
         >
           {isPending ? "در حال ارسال..." : "ثبت"}
         </button>
@@ -54,6 +72,8 @@ export default function CompleteProfilePage() {
             خطا در ثبت اطلاعات
           </p>
         )}
+
+        {message && <p className="text-red-500 text-sm text-center">{message}</p>}
       </div>
     </div>
   );

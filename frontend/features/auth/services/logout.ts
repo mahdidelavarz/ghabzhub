@@ -4,5 +4,5 @@ import { http } from "@/lib/http";
 
 
 export async function logoutApi() {
-  await http.post("/auth/logout"); // backend endpoint
+  await http.get("auth/logout"); // backend endpoint
 }

@@ -2,50 +2,33 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { API } from '../../config/api';  // ✅ named import
+import { useLogin } from '@/features/auth/hooks/useLogin';
 
 export default function LoginPage() {
   const router = useRouter();
+  const loginMutation = useLogin();
 
   const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  const handleLogin = async () => {
-    setLoading(true);
+  const handleLogin = () => {
     setMessage('');
 
-    try {
-      const res = await fetch(API.AUTH.LOGIN, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          mobile_number: mobile,
-          password,
-        }),
-      });
-
-      const data = await res.json();
-      setLoading(false);
-
-      if (res.ok && data.access_token) {
-        localStorage.setItem('access_token', data.access_token);
-        router.push('/');
-      } else {
-        const msg =
-          typeof data.detail === 'string'
-            ? data.detail
-            : Array.isArray(data.detail)
-            ? data.detail.map((e: any) => e.msg).join(', ')
-            : 'Login failed';
-        setMessage(msg);
+    loginMutation.mutate(
+      {
+        mobile_number: mobile,
+        password,
+      },
+      {
+        onError: () => {
+          setMessage('مشکلی پیش آمد');
+        },
       }
-    } catch {
-      setLoading(false);
-      setMessage('مشکلی پیش آمد');
-    }
+    );
   };
+
+  const loading = loginMutation.isPending;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -76,11 +59,8 @@ export default function LoginPage() {
           {loading ? 'در حال ورود...' : 'ورود'}
         </button>
 
-        {message && (
-          <p className="text-red-500 text-sm text-center">{message}</p>
-        )}
+        {message && <p className="text-red-500 text-sm text-center">{message}</p>}
 
-        {/* ✅ Link to register */}
         <p
           className="text-sm text-center text-blue-500 cursor-pointer hover:underline"
           onClick={() => router.push('/register')}
