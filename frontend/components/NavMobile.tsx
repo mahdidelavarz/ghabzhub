@@ -18,7 +18,7 @@ export function NavMobile() {
       { label: "سبد قبض", to: "/shopping", icon: "shopping" as const },
       { label: "منو", to: "?o=1", icon: "app" as const, isMenu: true },
     ],
-    []
+    [],
   );
 
   const moreLinks = useMemo(
@@ -31,7 +31,7 @@ export function NavMobile() {
       { label: "نسخه سازمانی", to: "/org", icon: "accessTime" as const },
       { label: "خروج از حساب کاربری", to: "/logout", icon: "logout" as const },
     ],
-    []
+    [],
   );
 
   return (
@@ -46,7 +46,11 @@ export function NavMobile() {
                   onClick={() => setMenuIsOpen(true)}
                   className="flex items-center max-sm:flex-col justify-center gap-x-3 py-2 w-full"
                 >
-                  <Icon name={item.icon} size={40} className="text-neutral-700" />
+                  <Icon
+                    name={item.icon}
+                    size={40}
+                    className="text-neutral-700"
+                  />
                   <span className="text-sm">{item.label}</span>
                 </button>
               ) : (
@@ -54,7 +58,11 @@ export function NavMobile() {
                   href={item.to}
                   className="link flex items-center max-sm:flex-col justify-center gap-x-3 py-2"
                 >
-                  <Icon name={item.icon} size={40} className="text-neutral-700" />
+                  <Icon
+                    name={item.icon}
+                    size={40}
+                    className="text-neutral-700"
+                  />
                   <span className="text-sm">{item.label}</span>
                 </a>
               )}
@@ -82,9 +90,23 @@ export function NavMobile() {
               className="bg-custom-blue/40 rounded-full p-2 shadow-2xl shadow-custom-blue"
             />
             <div className="flex items-center w-full justify-between px-2 py-1">
-              <p className="text-custom-white text-xl font-bold">
-                {user?.name || user?.mobile_number || "کاربر مهمان"}
-              </p>
+              {user ? (
+                <p className="text-custom-white text-xl font-bold">
+                  {user.name || user.mobile_number }
+                </p>
+              ) : (
+                <a
+                  href="/login"
+                  className="flex items-center gap-3 transition group duration-300 hover:scale-110 relative text-white"
+                >
+                  <Icon
+                    name="account_circle"
+                    size={35}
+                    className="rounded-lg p-[5px] bg-blue-200/70"
+                  />
+                  <span>ورود به حساب</span>
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -93,7 +115,10 @@ export function NavMobile() {
           {services.categories.map((service) => {
             const items = services[service.id];
             return (
-              <li key={service.id} className="p-3 transition group hover:scale-95">
+              <li
+                key={service.id}
+                className="p-3 transition group hover:scale-95"
+              >
                 <div className="flex items-center gap-3">
                   <Icon
                     name={service.icon as any}
@@ -111,7 +136,11 @@ export function NavMobile() {
                       key={item.label}
                       className="p-2 bg-custom-whitesmoke rounded-2xl grid place-items-center text-center"
                     >
-                      <Icon name={item.icon as any} size={30} color={service.color} />
+                      <Icon
+                        name={item.icon as any}
+                        size={30}
+                        color={service.color}
+                      />
                       <p className="text-xs">{item.label}</p>
                     </li>
                   ))}
@@ -125,7 +154,10 @@ export function NavMobile() {
         <br />
         <ul className="mt-3">
           {moreLinks.map((item) => (
-            <li key={item.label} className="p-3 transition group hover:scale-95">
+            <li
+              key={item.label}
+              className="p-3 transition group hover:scale-95"
+            >
               {item.icon === "logout" ? (
                 <button
                   type="button"
@@ -136,12 +168,20 @@ export function NavMobile() {
                   className="flex items-center gap-3 w-full text-right"
                   disabled={logoutMutation.isPending}
                 >
-                  <Icon name={item.icon as any} size={40} className="p-2 rounded-2xl" />
+                  <Icon
+                    name={item.icon as any}
+                    size={40}
+                    className="p-2 rounded-2xl"
+                  />
                   <p className="text-lg">{item.label}</p>
                 </button>
               ) : (
                 <a href={item.to} className="flex items-center gap-3">
-                  <Icon name={item.icon as any} size={40} className="p-2 rounded-2xl" />
+                  <Icon
+                    name={item.icon as any}
+                    size={40}
+                    className="p-2 rounded-2xl"
+                  />
                   <p className="text-lg">{item.label}</p>
                 </a>
               )}

@@ -43,6 +43,7 @@ const iconMap: Record<string, string> = {
   close: 'mdi:close',
   logout: 'mdi:logout',
   list: 'mdi:format-list-bulleted',
+  account_circle: 'mdi:account-circle',
 };
 
 export type IconName = keyof typeof iconMap;
