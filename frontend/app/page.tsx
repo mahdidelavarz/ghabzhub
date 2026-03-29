@@ -1,6 +1,7 @@
-import { BillingList } from "@/components/BillingList";
-import { Header } from "@/components/Header";
-import { NavBar } from "@/components/NavBar";
+import { BillingList } from "@/features/shared/ui/BillingList";
+import { Header } from "@/features/shared/ui/Header";
+import { NavBar } from "@/features/shared/ui/NavBar";
+
 
 
 export default function Home() {

@@ -1,8 +1,10 @@
-import { NavDesktop } from "./NavDesktop";
+
+import { ProfileWidget } from "@/features/auth/ui/ProfileWidget";
 import { NavMobile } from "./NavMobile";
 import { Logo } from "./Logo";
-import { Icon } from "./Icon";
-import { ProfileWidget } from "@/features/auth/ui/ProfileWidget";
+import { NavDesktop } from "./NavDesktop";
+import { LocalIcon } from "../icons/localIcon";
+
 
 export function NavBar() {
   return (
@@ -20,7 +22,7 @@ export function NavBar() {
                   href="/shopping"
                   className="flex items-center gap-3 transition group duration-300 hover:scale-110 relative text-xs"
                 >
-                  <Icon
+                  <LocalIcon
                     name="shopping"
                     size={30}
                     className="rounded-lg p-[5px] bg-blue-200/70"
@@ -31,7 +33,7 @@ export function NavBar() {
                   href="/history"
                   className="flex items-center gap-3 transition group duration-300 hover:scale-110 relative text-xs"
                 >
-                  <Icon
+                  <LocalIcon
                     name="cardToCard"
                     size={30}
                     className="rounded-lg text-custom-blue bg-custom-blue/20 p-[5px] bg-blue-200/70"

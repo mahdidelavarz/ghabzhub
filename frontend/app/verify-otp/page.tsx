@@ -1,4 +1,4 @@
-import VerifyOtpContent from "@/components/VerifyOtpContent";
+import VerifyOtpContent from "@/features/auth/ui/VerifyOtpContent";
 import { Suspense } from "react";
 
 

@@ -1,9 +1,9 @@
-"use client"
-import { useEffect, useState } from 'react';
-import { services, type ServiceCategoryId } from './types/services';
+"use client";
+import { useEffect, useState } from "react";
+import { services } from "../types/services";
 
-import { Icon } from './Icon';
-import { Logo } from './Logo';
+import { Logo } from "./Logo";
+import { LocalIcon } from "../icons/localIcon";
 
 export function Header() {
   const [scrollOnTarget, setScrollOnTarget] = useState(false);
@@ -12,11 +12,11 @@ export function Header() {
     const onScroll = () => {
       setScrollOnTarget(window.scrollY > 150);
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const offsetClass = scrollOnTarget ? '-translate-y-30 md:translate-y-12' : '';
+  const offsetClass = scrollOnTarget ? "-translate-y-30 md:translate-y-12" : "";
 
   return (
     <div
@@ -28,13 +28,13 @@ export function Header() {
         </div>
         <h1 className="text-custom-white md:text-2xl font-bold">
           <span className="hidden md:inline-block mb-3 text-4xl text-custom-white">
-            <Logo className='ml-10'/>
+            <Logo className="ml-10" />
           </span>
           سامانه پرداخت قبض <span className="text-2xl">هوشمند</span>
         </h1>
         <h2
           className={`text-custom-white md:text-2xl text-lg font-bold transition duration-700 ${
-            scrollOnTarget ? 'opacity-0' : ''
+            scrollOnTarget ? "opacity-0" : ""
           }`}
         >
           تجمیع و تسهیل در پرداخت قبوض
@@ -47,12 +47,12 @@ export function Header() {
               href={`#${category.id}`}
               className="hover:scale-110 transition py-2 px-1 grid place-items-center md:w-24 md:h-24 w-full cursor-pointer rounded-[25px] bg-custom-white shadow-2xl shadow-custom-neutral/20"
             >
-              <Icon
+              <LocalIcon
                 name={category.icon as any}
                 size={45}
                 className="w-[45px] h-[45px]"
-                color={category.color}
               />
+              {/* <Image src={svg} alt="My SVG" width={48} height={48} /> */}
               <span className="text-xs">{category.label}</span>
             </a>
           ))}
@@ -61,5 +61,3 @@ export function Header() {
     </div>
   );
 }
-
-

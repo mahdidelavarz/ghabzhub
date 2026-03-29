@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Icon } from "./Icon";
-import { services } from "./types/services";
 import { useAuthStore } from "@/features/auth/store/authStore";
 import { useLogout } from "@/features/auth/hooks/useLogout";
+import { services } from "../types/services";
+import { LocalIcon } from "../icons/localIcon";
 
 export function NavMobile() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -46,7 +46,7 @@ export function NavMobile() {
                   onClick={() => setMenuIsOpen(true)}
                   className="flex items-center max-sm:flex-col justify-center gap-x-3 py-2 w-full"
                 >
-                  <Icon
+                  <LocalIcon
                     name={item.icon}
                     size={40}
                     className="text-neutral-700"
@@ -58,7 +58,7 @@ export function NavMobile() {
                   href={item.to}
                   className="link flex items-center max-sm:flex-col justify-center gap-x-3 py-2"
                 >
-                  <Icon
+                  <LocalIcon
                     name={item.icon}
                     size={40}
                     className="text-neutral-700"
@@ -79,15 +79,14 @@ export function NavMobile() {
         <div className="menu-header">
           <div className="flex justify-end">
             <button type="button" onClick={() => setMenuIsOpen(false)}>
-              <Icon name="close" size={40} color="#ffffff" />
+              <LocalIcon name="close" size={40} className="text-white" />
             </button>
           </div>
           <div className="grid place-items-center gap-4">
-            <Icon
+            <LocalIcon
               name="profile"
               size={120}
-              color="#ffffff"
-              className="bg-custom-blue/40 rounded-full p-2 shadow-2xl shadow-custom-blue"
+              className="bg-custom-blue/40 rounded-full p-2 shadow-2xl shadow-custom-blue text-white"
             />
             <div className="flex items-center w-full justify-between px-2 py-1">
               {user ? (
@@ -99,8 +98,9 @@ export function NavMobile() {
                   href="/login"
                   className="flex items-center gap-3 transition group duration-300 hover:scale-110 relative text-white"
                 >
-                  <Icon
-                    name="account_circle"
+                  <LocalIcon
+                    name="bill"
+                    //"acountCircle"
                     size={35}
                     className="rounded-lg p-[5px] bg-blue-200/70"
                   />
@@ -120,12 +120,12 @@ export function NavMobile() {
                 className="p-3 transition group hover:scale-95"
               >
                 <div className="flex items-center gap-3">
-                  <Icon
+                  <LocalIcon
                     name={service.icon as any}
                     size={40}
-                    color="#f8fafc"
+                    // color="#f8fafc"
                     className="p-2 rounded-2xl"
-                    style={{ backgroundColor: service.color }}
+                    // style={{ backgroundColor: service.color }}
                   />
                   <p className="text-lg">{service.label}</p>
                 </div>
@@ -136,10 +136,10 @@ export function NavMobile() {
                       key={item.label}
                       className="p-2 bg-custom-whitesmoke rounded-2xl grid place-items-center text-center"
                     >
-                      <Icon
+                      <LocalIcon
                         name={item.icon as any}
                         size={30}
-                        color={service.color}
+                        // color={service.color}
                       />
                       <p className="text-xs">{item.label}</p>
                     </li>
@@ -168,7 +168,7 @@ export function NavMobile() {
                   className="flex items-center gap-3 w-full text-right"
                   disabled={logoutMutation.isPending}
                 >
-                  <Icon
+                  <LocalIcon
                     name={item.icon as any}
                     size={40}
                     className="p-2 rounded-2xl"
@@ -177,7 +177,7 @@ export function NavMobile() {
                 </button>
               ) : (
                 <a href={item.to} className="flex items-center gap-3">
-                  <Icon
+                  <LocalIcon
                     name={item.icon as any}
                     size={40}
                     className="p-2 rounded-2xl"

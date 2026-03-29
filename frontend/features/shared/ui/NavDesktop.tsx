@@ -1,7 +1,8 @@
 "use client"
-import { BillingList } from './BillingList';
-import { Icon } from './Icon';
+
 import { useState } from 'react';
+import { Icon } from '../icons/Icon';
+import { BillingList } from './BillingList';
 
 type NavItem = {
   label: string;

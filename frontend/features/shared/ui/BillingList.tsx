@@ -1,5 +1,6 @@
-import { services, type ServiceCategoryId } from './types/services';
-import { Icon } from './Icon';
+import { services, type ServiceCategoryId } from "../types/services";
+import { Icon } from "../icons/Icon";
+import { LocalIcon } from "../icons/localIcon";
 
 type Props = {
   titles: string[];
@@ -9,7 +10,13 @@ type Props = {
   cssStyles: string;
 };
 
-export function BillingList({ titles, lists, colors, icons, cssStyles }: Props) {
+export function BillingList({
+  titles,
+  lists,
+  colors,
+  icons,
+  cssStyles,
+}: Props) {
   return (
     <>
       {lists.map((categoryId, index) => {
@@ -26,10 +33,10 @@ export function BillingList({ titles, lists, colors, icons, cssStyles }: Props) 
             className="bg-custom-white rounded-[33px] p-6 container mx-auto my-5"
           >
             <div className="flex items-center gap-3">
-              {icon && (
-                <Icon name={icon} size={25} color={color} />
-              )}
-              <span className="font-bold text-custom-neutral text-sm">{title}</span>
+              {icon && <LocalIcon name={icon} size={25} className={color} />}
+              <span className="font-bold text-custom-neutral text-sm">
+                {title}
+              </span>
             </div>
             <div>
               <div className={cssStyles}>
@@ -41,14 +48,14 @@ export function BillingList({ titles, lists, colors, icons, cssStyles }: Props) 
                     <a
                       href={service.disabled ? undefined : service.to}
                       className={`transition hover:scale-110 hover:opacity-60 ${
-                        service.disabled ? 'opacity-40 pointer-events-none' : ''
+                        service.disabled ? "opacity-40 pointer-events-none" : ""
                       }`}
                     >
-                      <Icon
+                      <LocalIcon
                         name={service.icon as any}
                         size={55}
                         className="w-[70px] h-[70px] p-3 bg-custom-whitesmoke rounded-2xl"
-                        color={color}
+                        // color={color}
                       />
                       <p className="text-xs mt-2">{service.label}</p>
                     </a>
@@ -62,5 +69,3 @@ export function BillingList({ titles, lists, colors, icons, cssStyles }: Props) 
     </>
   );
 }
-
-
