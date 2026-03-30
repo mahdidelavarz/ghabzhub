@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { services } from "../types/services";
 
 import { Logo } from "./Logo";
 import { LocalIcon } from "../icons/localIcon";
+import { services } from "../data/data";
 
 export function Header() {
   const [scrollOnTarget, setScrollOnTarget] = useState(false);
@@ -16,7 +16,9 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const offsetClass = scrollOnTarget ? "-translate-y-30 md:translate-y-12" : "";
+  const offsetClass = scrollOnTarget
+    ? "-translate-y-30 md:-translate-y-15"
+    : "";
 
   return (
     <div
@@ -40,7 +42,7 @@ export function Header() {
           تجمیع و تسهیل در پرداخت قبوض
         </h2>
 
-        <div className="md:w-7/12 w-10/12 mx-auto rounded-[25px] translate-y-1/2 grid grid-cols-4 md:gap-6 gap-2">
+        <div className="md:w-7/12 w-11/12 mx-auto rounded-[25px] translate-y-1/2 grid grid-cols-4 md:gap-6 gap-1">
           {services.categories.map((category) => (
             <a
               key={category.id}
@@ -52,8 +54,10 @@ export function Header() {
                 size={45}
                 className="w-[45px] h-[45px]"
               />
-              {/* <Image src={svg} alt="My SVG" width={48} height={48} /> */}
-              <span className="text-xs">{category.label}</span>
+
+              <span className={`text-xs ${scrollOnTarget && "hidden"}`}>
+                {category.label}
+              </span>
             </a>
           ))}
         </div>

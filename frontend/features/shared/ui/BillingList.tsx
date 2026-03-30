@@ -1,6 +1,6 @@
-import { services, type ServiceCategoryId } from "../types/services";
-import { Icon } from "../icons/Icon";
+import { type ServiceCategoryId } from "../types/services";
 import { LocalIcon } from "../icons/localIcon";
+import { services } from "../data/data";
 
 type Props = {
   titles: string[];

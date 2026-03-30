@@ -10,7 +10,7 @@ export function NavBar() {
   return (
     <div className="fixed top-0 left-0 w-full z-50">
       <NavMobile />
-      <nav className=" top-0 left-0 w-full shadow-sm hidden lg:block relative z-50 bg-custom-white">
+      <nav className=" top-0 left-0 w-full shadow-sm hidden md:block relative z-50 bg-custom-white">
         <div className="container w-11/12 mx-auto ">
           <div className="py-5">
             <div className="flex justify-between items-center">

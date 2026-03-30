@@ -2,16 +2,8 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Providers } from "./providers";
-
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
+import { NavBar } from "@/features/shared/ui/NavBar";
+import { Header } from "@/features/shared/ui/Header";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,7 +18,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Providers> {children}</Providers>
+        <Providers>
+          <div className="max-sm:mb-28 lg:w-9/12 mx-auto">
+            <NavBar />
+            <Header />
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   );

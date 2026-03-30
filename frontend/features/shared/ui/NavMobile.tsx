@@ -3,8 +3,9 @@
 import { useMemo, useState } from "react";
 import { useAuthStore } from "@/features/auth/store/authStore";
 import { useLogout } from "@/features/auth/hooks/useLogout";
-import { services } from "../types/services";
+
 import { LocalIcon } from "../icons/localIcon";
+import { services } from "../data/data";
 
 export function NavMobile() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -36,7 +37,7 @@ export function NavMobile() {
 
   return (
     <>
-      <nav className="lg:hidden block z-30 fixed bottom-0 bg-custom-white rounded-t-3xl shadow-2xl shadow-black/70 border border-slate-100 left-1/2 -translate-x-1/2 w-full">
+      <nav className="md:hidden block z-30 fixed bottom-0 bg-custom-white rounded-t-3xl shadow-2xl shadow-black/70 border border-slate-100 left-1/2 -translate-x-1/2 w-full">
         <ul className="grid grid-cols-4 p-2 cursor-pointer">
           {bottomNav.map((item) => (
             <li key={item.label}>
@@ -91,7 +92,7 @@ export function NavMobile() {
             <div className="flex items-center w-full justify-between px-2 py-1">
               {user ? (
                 <p className="text-custom-white text-xl font-bold">
-                  {user.name || user.mobile_number }
+                  {user.name || user.mobile_number}
                 </p>
               ) : (
                 <a

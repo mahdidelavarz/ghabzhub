@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { API } from "@/config/api";
+import { Logo } from "@/features/shared/ui/Logo";
 
 export default function VerifyOtpContent() {
   const router = useRouter();
@@ -58,6 +59,7 @@ export default function VerifyOtpContent() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-600 via-blue-400 to-blue-300 p-4">
+      <Logo className="absolute text-5xl top-40 text-blue-200"/>
       <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl w-full max-w-md py-8 px-3 lg:px-8 border border-white/20">
         <h1 className="text-2xl font-bold text-center text-white mb-8">
           تایید کد ارسال‌شده
