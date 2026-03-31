@@ -23,7 +23,7 @@ import AnnualTollIcon from "./svg/annualToll.svg";
 import TrafficPlanIcon from "./svg/trafficPlan.svg";
 import CarTaxIcon from "./svg/carTax.svg";
 import MotorTaxIcon from "./svg/motorTax.svg";
-import PlateNumberIcon from "./svg/plateNumber.svg";
+import PlateNumberIcon from "./plateNumber.svg";
 import CarDocumentsIcon from "./svg/carDocuments.svg";
 import NegativePointIcon from "./svg/negativePoint.svg";
 import DrivingLicenseIcon from "./svg/drivingLicense.svg";
