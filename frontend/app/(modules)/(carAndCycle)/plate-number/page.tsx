@@ -7,6 +7,7 @@ import { useState } from "react";
 import FormButton from "@/features/shared/ui/FormButton";
 import Image from "next/image";
 import RulesModal from "@/features/modules/plateNumber/ui/RulesModal";
+import { PlateNumberIcon } from "@/features/shared/icons/Icon";
 
 function PlateNumberPage() {
   const [nationalNumber, setNationalNumber] = useState("");
@@ -60,12 +61,7 @@ function PlateNumberPage() {
             جزئیاتی مانند تاریخ فک‌شدن، مرکز شماره‌گذاری، وضعیت و شماره سریال را
             مشاهده کنند.
           </p>
-          <Image
-            src="../../../../assets/imgs/plate-number-inquiry.svg"
-            width={40}
-            height={20}
-            alt="plate"
-          />
+          <LocalIcon name="PlateBg" alt="plate" className="w-full" />
         </div>
       </div>
     </ProtectedRoute>

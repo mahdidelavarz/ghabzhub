@@ -59,6 +59,7 @@ import Svgexport79Icon from "./svg/svgexport-79.svg";
 import TrashIcon from "./svg/trash.svg";
 import UserProfileIcon from "./svg/userprofile.svg";
 import WarningIcon from "./svg/warning.svg";
+import PlateBgIcon from "../../../assets/imgs/plate-number-inquiry.svg";
 
 // Map icon names to image URLs
 const iconUrls = {
@@ -120,6 +121,7 @@ const iconUrls = {
   Trash: TrashIcon,
   UserProfile: UserProfileIcon,
   Warning: WarningIcon,
+  PlateBg: PlateBgIcon,
 } as const;
 
 export type IconName = keyof typeof iconUrls;

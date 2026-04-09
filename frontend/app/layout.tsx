@@ -2,8 +2,6 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { Providers } from "./providers";
-import { NavBar } from "@/features/shared/ui/NavBar";
-import { Header } from "@/features/shared/ui/Header";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,8 +18,6 @@ export default function RootLayout({
       <body>
         <Providers>
           <div className="max-sm:mb-28 lg:w-9/12 mx-auto">
-            <NavBar />
-            <Header />
             {children}
           </div>
         </Providers>

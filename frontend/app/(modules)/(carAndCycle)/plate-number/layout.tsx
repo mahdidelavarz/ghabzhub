@@ -1,5 +1,7 @@
 // import "./globals.css";
 import { Providers } from "@/app/providers";
+import { Header } from "@/features/shared/ui/Header";
+import { NavBar } from "@/features/shared/ui/NavBar";
 
 import type { Metadata } from "next";
 
@@ -15,7 +17,11 @@ export default function Layout({
 }>) {
   return (
     <Providers>
-      <div className="w-full h-auto flex justify-center items-center ">{children}</div>
+      <NavBar />
+      <Header />
+      <div className="w-full h-auto flex justify-center items-center ">
+        {children}
+      </div>
     </Providers>
   );
 }
