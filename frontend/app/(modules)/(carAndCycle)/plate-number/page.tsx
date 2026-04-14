@@ -5,9 +5,7 @@ import { ProtectedRoute } from "@/lib/protectedRoute";
 import FormInput from "../../../../features/shared/ui/FormInput";
 import { useState } from "react";
 import FormButton from "@/features/shared/ui/FormButton";
-import Image from "next/image";
 import RulesModal from "@/features/modules/plateNumber/ui/RulesModal";
-import { PlateNumberIcon } from "@/features/shared/icons/Icon";
 
 function PlateNumberPage() {
   const [nationalNumber, setNationalNumber] = useState("");
