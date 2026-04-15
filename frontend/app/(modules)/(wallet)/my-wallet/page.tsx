@@ -152,6 +152,3 @@ function WalletPaySubmit({
     </div>
   );
 }
-
-
-//lksdcf
