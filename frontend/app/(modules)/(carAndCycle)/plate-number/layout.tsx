@@ -19,7 +19,7 @@ export default function Layout({
     <Providers>
       <NavBar />
       <Header />
-      <div className="w-full h-auto flex justify-center items-center ">
+      <div className="w-full h-auto flex justify-center items-center  lg:w-9/12 mx-auto">
         {children}
       </div>
     </Providers>

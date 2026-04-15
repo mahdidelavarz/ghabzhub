@@ -18,4 +18,7 @@ export const API = {
     LOGOUT: `${API_BASE}/auth/logout`,
     PROFILE: `${API_BASE}/me`,
   },
+  PNE: {
+    PNE_IDENTIFIER: `${API_BASE}/...`
+  }
 };

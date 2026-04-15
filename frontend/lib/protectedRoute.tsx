@@ -21,13 +21,13 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     if (!isClient || isLoading) return;
 
     if (!user) {
-      router.push("/login");
+      // router.push("/login");
     }
   }, [user, isLoading, isClient, router]);
 
-  if (!isClient || isLoading || !user) {
-    return null;
-  }
+  // if (!isClient || isLoading || !user) {
+  //   return null;
+  // }
 
   return <>{children}</>;
 };

@@ -1,10 +1,43 @@
 "use client";
+import { usePNEIdentifier } from "@/features/modules/plateNumber/hooks/usePlateNumber";
+import { usePlateStore } from "@/features/modules/plateNumber/store/plateStore";
 import FormButton from "@/features/shared/ui/FormButton";
 import FormInput from "@/features/shared/ui/FormInput";
 import GrayLine from "@/features/shared/ui/GrayLine";
 import { Logo } from "@/features/shared/ui/Logo";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 function page() {
+  const router = useRouter();
+  const { nationalNumber, phoneNumber, clearPlateData } = usePlateStore();
+  const { mutate, isPending } = usePNEIdentifier();
+
+  useEffect(() => {
+    if (!nationalNumber || !phoneNumber) {
+      toast.error("اطلاعات شما وارد نشده است!");
+      router.push("/plate-number");
+    }
+  }, [nationalNumber, phoneNumber, router]);
+
+  const handleConfirm = (e: any) => {
+    e.preventDefault();
+    mutate(
+      {
+        nationalIdentifier: Number(nationalNumber),
+        mobileNumber: Number(phoneNumber),
+      },
+      {
+        onSuccess: () => {
+          clearPlateData();
+          router.push("/plate/results");
+        },
+        onSettled: () => {},
+      },
+    );
+  };
+
   return (
     <div className="w-full h-auto pt-54 lg:pt-24 flex justify-center lg:justify-between bg-gray-200 lg:bg-transparent">
       {/* mobile header */}
@@ -23,20 +56,20 @@ function page() {
         </span>
         <form action="">
           <div className="w-full h-auto py-5 flex gap-2 relative">
-            <button className="w-14 h-14 flex justify-center items-center bg-gray-200 border border-gray-300 shadow-sm shadow-gray-3 rounded-xl text-blue-600">
+            <button onClick={(e) => console.log(e.preventDefault())} className="disabled w-14 h-14 flex justify-center items-center bg-gray-200 border border-gray-300 shadow-sm shadow-gray-3 rounded-xl text-blue-600">
               --
             </button>
             <FormInput
               type="number"
               onChange={() => console.log("form changed")}
-              value="16000"
-              placeholder="161.000"
-              className="w-60 lg:w-120 outline-none bg-gray-200 border border-gray-300 shadow-sm shadow-gray-3 px-4 rounded-xl text-center "
+              value="161700"
+              placeholder="161.700"
+              className="disabled w-60 lg:w-120 outline-none bg-gray-200 border border-gray-300 shadow-sm shadow-gray-3 px-4 rounded-xl text-center "
             />
             <span className="absolute top-8.5 right-18 font-semibold text-slate-400">
               ریال
             </span>
-            <button className="w-14 h-14 flex justify-center items-center bg-gray-200 border border-gray-300 shadow-sm shadow-gray-3 rounded-xl text-blue-600">
+            <button onClick={(e) => console.log(e.preventDefault())} className="disabled w-14 h-14 flex justify-center items-center bg-gray-200 border border-gray-300 shadow-sm shadow-gray-3 rounded-xl text-blue-600">
               +
             </button>
           </div>
@@ -55,7 +88,10 @@ function page() {
               </div>
             </div>
           </div>
-          <WalletPaySubmit />
+          <WalletPaySubmit
+            handleConfirm={(e: any) => handleConfirm(e)}
+            isPending={isPending}
+          />
         </form>
       </div>
     </div>
@@ -93,19 +129,25 @@ function WalletHeader({ className }: { className?: string }) {
   );
 }
 
-function WalletPaySubmit() {
+function WalletPaySubmit({
+  handleConfirm,
+  isPending,
+}: {
+  handleConfirm: (e : any) => void;
+  isPending: boolean;
+}) {
   return (
     <div className="w-full h-34 fixed right-0 bg-gray-200 shadow-inner p-5 text-slate-600 flex flex-col gap-4 lg:gap-6 lg:absolute bottom-0 lg:left-50 lg:top-24 lg:w-120 lg:h-44 lg:bg-white lg:rounded-2xl lg:right-auto">
       <div className="w-full flex justify-between">
         <span>مبلغ شارژ کیف پول :</span>
         <span>
-          <b>161.000</b> ریال
+          <b>161.700</b> ریال
         </span>
       </div>
       <FormButton
-        label="پرداخت"
-        loading={false}
-        onClick={() => console.log("he")}
+        label="تایید و پرداخت"
+        onClick={(e : any) => handleConfirm(e)}
+        loading={isPending}
       />
     </div>
   );

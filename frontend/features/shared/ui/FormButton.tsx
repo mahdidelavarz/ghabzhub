@@ -1,7 +1,7 @@
 import React from "react";
 
 interface FormButtonProps {
-  onClick: () => void;
+  onClick: (e?: any) => void;
   loading: boolean;
   disabled?: boolean;
   label: string;
