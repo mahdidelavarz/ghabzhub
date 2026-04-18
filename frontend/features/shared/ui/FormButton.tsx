@@ -1,10 +1,12 @@
 import React from "react";
 
+
 interface FormButtonProps {
   onClick: (e?: any) => void;
   loading: boolean;
   disabled?: boolean;
   label: string;
+  type?: "submit" | "reset" | "button" | undefined;
 }
 
 const FormButton: React.FC<FormButtonProps> = ({
@@ -12,9 +14,11 @@ const FormButton: React.FC<FormButtonProps> = ({
   loading,
   disabled = false,
   label,
+  type = 'button',
 }) => {
   return (
     <button
+      type={type}
       onClick={onClick}
       disabled={loading || disabled}
       className={`w-full py-3.5 rounded-xl font-semibold text-white transition-all duration-300 shadow-lg ${

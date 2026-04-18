@@ -1,5 +1,3 @@
-// config/api.ts
-
 const API_BASE = process.env.NEXT_PUBLIC_URL;
 
 if (!API_BASE) {
@@ -19,6 +17,8 @@ export const API = {
     PROFILE: `${API_BASE}/me`,
   },
   PNE: {
-    PNE_IDENTIFIER: `${API_BASE}/...`
+    GET_PRICE: `${API_BASE}/prices`,
+    GET_PAYMENT_URL: `${API_BASE}/ipg/create?service_name=pelak_codeMeli&payment_method=gateway`,
+    PNE_RESULT: (orderId: string) => `${API_BASE}/order/${orderId}/result`
   }
 };

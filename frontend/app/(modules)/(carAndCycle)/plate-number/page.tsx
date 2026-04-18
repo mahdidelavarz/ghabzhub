@@ -1,8 +1,9 @@
-// features/modules/plateNumber/page.tsx
 "use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { LocalIcon } from "@/features/shared/icons/localIcon";
 import GrayLine from "@/features/shared/ui/GrayLine";
 import { ProtectedRoute } from "@/lib/protectedRoute";
@@ -10,29 +11,53 @@ import FormInput from "@/features/shared/ui/FormInput";
 import FormButton from "@/features/shared/ui/FormButton";
 import RulesModal from "@/features/modules/plateNumber/ui/RulesModal";
 import { usePlateStore } from "@/features/modules/plateNumber/store/plateStore";
+import { useGetPrice } from "@/features/modules/plateNumber/hooks/useGetPrice";
+import {
+  PlateFormData,
+  plateFormSchema,
+} from "@/features/modules/plateNumber/schemas/plateFormSchema";
+import toast from "react-hot-toast";
 
 function PlateNumberPage() {
   const router = useRouter();
-  const [nationalNumber, setNationalNumber] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const setPlateData = usePlateStore((s) => s.setPlateData);
+  const setPrice = usePlateStore((s) => s.setPrice);
+  const { mutate: getPrice, isPending: isPriceLoading } = useGetPrice();
 
-  const clearPlateData = usePlateStore((s) => s.clearPlateData);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<PlateFormData>({
+    resolver: zodResolver(plateFormSchema),
+    mode: "onChange",
+  });
 
-  const handleAcceptRules = () => {
-    if (!nationalNumber || !phoneNumber) return;
-    clearPlateData(); 
-    setShowModal(true);
+  const onSubmit = (data: PlateFormData) => {
+    // First, get the price
+    getPrice(undefined, {
+      onSuccess: (priceData) => {
+        // Save price to store
+        setPrice(priceData.price);
+        // Save user data to store
+        setPlateData({
+          nationalNumber: data.nationalNumber,
+          phoneNumber: data.phoneNumber,
+        });
+        // Show the modal
+        setShowModal(true);
+      },
+      onError: () => {
+        toast.error("دریافت مبلغ استعلام با خطا مواجه شد");
+      },
+    });
   };
 
   return (
     <ProtectedRoute>
-      <RulesModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        nationalNumber={nationalNumber}
-        phoneNumber={phoneNumber}
-      />
+      <RulesModal showModal={showModal} setShowModal={setShowModal} />
 
       <div className="w-full h-auto flex flex-col gap-5 lg:flex-row lg:p-20">
         <div className="w-full h-auto bg-white rounded-2xl shadow-md shadow-gray-100 lg:w-1/2 lg:p-6">
@@ -46,32 +71,54 @@ function PlateNumberPage() {
             <h2 className="font-semibold text-lg">استعلام پلاک فعال ماشین</h2>
           </div>
 
-          <div className="p-3 flex flex-col gap-3 mt-3">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="p-3 flex flex-col gap-3 mt-3"
+          >
             <p className="text-xs py-2 text-gray-500">
               برای مشاهده نتیجه، اطلاعات زیر را وارد کنید.
             </p>
-            <FormInput
-              type="number"
-              value={nationalNumber}
-              onChange={(num) => setNationalNumber(num)}
-              placeholder="کد ملی مالک خودرو"
-            />
-            <FormInput
-              type="number"
-              value={phoneNumber}
-              onChange={(num) => setPhoneNumber(num)}
-              placeholder="شماره موبایل"
-            />
+            <div>
+              <FormInput
+                className="w-full"
+                type="number"
+                {...register("nationalNumber")}
+                placeholder="کد ملی مالک خودرو"
+                hasError={!!errors.nationalNumber}
+              />
+              {errors.nationalNumber && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.nationalNumber.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <FormInput
+                className="w-full"
+                type="number"
+                {...register("phoneNumber")}
+                placeholder="شماره موبایل"
+                hasError={!!errors.phoneNumber}
+              />
+              {errors.phoneNumber && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.phoneNumber.message}
+                </p>
+              )}
+            </div>
             <FormButton
               label="استعلام پلاک‌های فعال"
-              onClick={handleAcceptRules}
-              loading={false}
+              onClick={handleSubmit(onSubmit)}
+              loading={isPriceLoading}
+              type="submit"
             />
-          </div>
+          </form>
         </div>
 
         <div className="hidden lg:block w-full h-auto rounded-lg shadow-md shadow-slate-50 lg:w-1/2 lg:p-6">
-          <h3 className="mb-4 font-semibold">چگونه متوجه شویم چند پلاک فعال داریم؟</h3>
+          <h3 className="mb-4 font-semibold">
+            چگونه متوجه شویم چند پلاک فعال داریم؟
+          </h3>
           <p className="text-slate-400 leading-8">
             سامانه قبضینو امکان استعلام پلاک فعال با کد ملی را فراهم کرده تا
             کلیه کاربران بتوانند با وارد کردن کد ملی و شماره موبایل خود در کادر
