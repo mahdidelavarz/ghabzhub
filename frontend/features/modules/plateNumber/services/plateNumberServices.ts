@@ -14,9 +14,14 @@ export const getPriceService = async (): Promise<{ price: number }> => {
   return res.data;
 };
 
-export const getPaymentUrlService = async (): Promise<{ payment_url: string }> => {
-  // Construct URL with query parameters
-  const url = `${API.PNE.GET_PAYMENT_URL}?service_name=pelak_codeMeli&payment_method=gateway`;
-  const res = await http.post(url);
+export const getPaymentUrlService = async (amount: number): Promise<{ payment_url: string; order_id: number }> => {
+  const res = await http.post(API.PNE.GET_PAYMENT_URL, {
+    service_name: "pelak_codeMeli",
+    payment_method: "gateway",
+    input_data: {
+      amount: amount,
+      currency: "USD"
+    }
+  });
   return res.data;
 };

@@ -8,42 +8,66 @@ import toast from "react-hot-toast";
 function PaymentCallbackContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  
+  // Get all parameters from the URL
   const status = searchParams.get("status");
-  const orderId = searchParams.get("order_id"); // Get order_id from the response
+  const orderId = searchParams.get("order_id");
+  const paymentId = searchParams.get("payment_id");
+  const message = searchParams.get("message");
+  const amount = searchParams.get("amount");
+  
   const { nationalNumber, phoneNumber, clearPlateData, setOrderId } = usePlateStore();
   const { mutate: submitPayment, isPending } = usePNEIdentifier();
 
   useEffect(() => {
-    if (status === "processing" && orderId) {
-      // Save the order_id to the store
-      setOrderId(orderId);
-      
-      // Now call the PNE identifier service with the order_id
-      submitPayment(
-        {
-          nationalIdentifier: Number(nationalNumber),
-          mobileNumber: Number(phoneNumber),
-        },
-        {
-          onSuccess: (result) => {
-            clearPlateData();
-            toast.success("استعلام با موفقیت انجام شد");
-            router.push("/plate/results");
-          },
-          onError: () => {
-            toast.error("خطا در انجام استعلام");
-            router.push("/plate-number");
-          },
+    // Handle different statuses from backend
+    switch(status) {
+      case "success":
+      case "processing":
+        // Payment successful
+        if (orderId) {
+          setOrderId(orderId);
+          submitPayment(
+            {
+              nationalIdentifier: Number(nationalNumber),
+              mobileNumber: Number(phoneNumber),
+            },
+            {
+              onSuccess: (result) => {
+                clearPlateData();
+                toast.success("استعلام با موفقیت انجام شد");
+                router.push("/plate/results");
+              },
+              onError: () => {
+                toast.error("خطا در انجام استعلام");
+                router.push("/plate-number");
+              },
+            }
+          );
+        } else {
+          toast.error("اطلاعات پرداخت کامل نیست");
+          router.push("/payment/error");
         }
-      );
-    } else if (status === "failed") {
-      toast.error("پرداخت ناموفق بود");
-      router.push("/plate-number");
-    } else {
-      toast.error("خطا در پردازش پرداخت");
-      router.push("/plate-number");
+        break;
+        
+      case "failed":
+        // Payment failed
+        toast.error(message || "پرداخت ناموفق بود");
+        router.push("/payment/failed");
+        break;
+        
+      case "error":
+        // Technical error
+        toast.error(message || "خطا در پردازش پرداخت");
+        router.push("/payment/error");
+        break;
+        
+      default:
+        // Unknown status
+        toast.error("وضعیت نامشخص پرداخت");
+        router.push("/payment/error");
     }
-  }, [status, orderId, submitPayment, nationalNumber, phoneNumber, clearPlateData, setOrderId, router]);
+  }, [status, orderId, message, submitPayment, nationalNumber, phoneNumber, clearPlateData, setOrderId, router]);
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -52,6 +76,9 @@ function PaymentCallbackContent() {
           {isPending ? "در حال استعلام پلاک..." : "در حال پردازش..."}
         </h2>
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+        <p className="mt-4 text-gray-600">
+          لطفاً چند لحظه صبر کنید...
+        </p>
       </div>
     </div>
   );

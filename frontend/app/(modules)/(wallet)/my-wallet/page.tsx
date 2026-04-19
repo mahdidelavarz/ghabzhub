@@ -12,9 +12,15 @@ import toast from "react-hot-toast";
 
 function WalletPage() {
   const router = useRouter();
-  const { nationalNumber, phoneNumber, price, clearPlateData } = usePlateStore();
-  const { mutate: getPaymentUrl, isPending: isPaymentUrlLoading, data: paymentData } = useGetPaymentUrl();
-  const { mutate: submitPayment, isPending: isSubmitPending } = usePNEIdentifier();
+  const { nationalNumber, phoneNumber, price, clearPlateData } =
+    usePlateStore();
+  const {
+    mutate: getPaymentUrl,
+    isPending: isPaymentUrlLoading,
+    data: paymentData,
+  } = useGetPaymentUrl();
+  const { mutate: submitPayment, isPending: isSubmitPending } =
+    usePNEIdentifier();
   const [amount, setAmount] = useState<string>("");
 
   useEffect(() => {
@@ -28,21 +34,25 @@ function WalletPage() {
   }, [nationalNumber, phoneNumber, price, router]);
 
   // After getting payment URL, redirect the user
+  // Update the useEffect that handles paymentData
   useEffect(() => {
-    if (paymentData?.payment_url) {
-      // Redirect to payment gateway
-      window.location.href = paymentData.payment_url;
+    if (paymentData?.payment_url && paymentData?.order_id) {
+      router.push(
+        `/payment/processing?payment_url=${encodeURIComponent(paymentData.payment_url)}&order_id=${paymentData.order_id}`,
+      );
     }
-  }, [paymentData]);
+  }, [paymentData, router]);
 
   const handlePayment = async () => {
-    if (!amount || parseInt(amount) <= 0) {
+    const amountValue = parseInt(amount);
+
+    if (!amountValue || amountValue <= 0) {
       toast.error("مبلغ وارد شده معتبر نیست");
       return;
     }
 
-    // Get payment URL (order_id will come from callback, not from this response)
-    getPaymentUrl();
+    // Get payment URL with the amount in the request body
+    getPaymentUrl(amountValue);
   };
 
   return (
@@ -97,7 +107,8 @@ function WalletPage() {
             </button>
           </div>
           <span className="text-sm text-blue-500">
-            معادل {new Intl.NumberFormat('fa-IR').format(parseInt(amount) || 0)} تومان
+            معادل {new Intl.NumberFormat("fa-IR").format(parseInt(amount) || 0)}{" "}
+            تومان
           </span>
           <div className="w-full flex flex-col gap-3 mt-6 relative">
             <span className="text-slate-400">
@@ -133,8 +144,8 @@ function WalletPrice({ className }: { className?: string }) {
       <div className="w-full h-25 border border-gray-300 rounded-2xl bg-gray-100 flex flex-col justify-between p-4">
         <div className="w-full flex justify-between">
           <span className="font-bold text-slate-700">مبلغ استعلام</span>
-          <button 
-            onClick={() => window.location.reload()} 
+          <button
+            onClick={() => window.location.reload()}
             className="text-slate-500 hover:text-slate-700 transition-colors"
           >
             refresh
@@ -142,7 +153,9 @@ function WalletPrice({ className }: { className?: string }) {
         </div>
         <div className="w-full flex items-center gap-2 text-slate-500">
           <span>مبلغ قابل پرداخت :</span>
-          <span>{price ? new Intl.NumberFormat('fa-IR').format(price) : '0'} ریال</span>
+          <span>
+            {price ? new Intl.NumberFormat("fa-IR").format(price) : "0"} ریال
+          </span>
         </div>
       </div>
     </div>
@@ -155,7 +168,7 @@ function WalletHeader({ className }: { className?: string }) {
     <div
       className={`w-full h-20 flex items-center justify-between px-4 ${className}`}
     >
-      <button 
+      <button
         onClick={() => router.back()}
         className="hover:text-blue-600 transition-colors"
       >
@@ -175,8 +188,10 @@ function WalletPaySubmit({
   isPending: boolean;
   amount: string;
 }) {
-  const formattedAmount = new Intl.NumberFormat('fa-IR').format(parseInt(amount) || 0);
-  
+  const formattedAmount = new Intl.NumberFormat("fa-IR").format(
+    parseInt(amount) || 0,
+  );
+
   return (
     <div className="w-full h-34 fixed right-0 bg-gray-200 shadow-inner p-5 text-slate-600 flex flex-col gap-4 lg:gap-6 lg:absolute bottom-0 lg:left-50 lg:top-24 lg:w-120 lg:h-44 lg:bg-white lg:rounded-2xl lg:right-auto">
       <div className="w-full flex justify-between">
@@ -189,7 +204,6 @@ function WalletPaySubmit({
         label="تایید و پرداخت"
         onClick={handleConfirm}
         loading={isPending}
-        type="button"
       />
     </div>
   );
