@@ -4,7 +4,8 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useAuthStore } from "../store/authStore";
-import { logoutApi } from "../services/logout";
+import { logoutApi } from "../services/authServices";
+
 
 export function useLogout() {
   const clearUser = useAuthStore((s) => s.clearUser);

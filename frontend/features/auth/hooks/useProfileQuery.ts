@@ -1,11 +1,9 @@
-// features/auth/hooks/useProfileQuery.ts
-"use client";
-
 import { useQuery } from "@tanstack/react-query";
 
 import { useAuthStore } from "../store/authStore";
-import { getProfileApi } from "../services/profile";
+
 import { useEffect } from "react";
+import { getProfileService } from "../services/authServices";
 
 export function useProfileQuery() {
     const setUser = useAuthStore((s) => s.setUser);
@@ -14,7 +12,7 @@ export function useProfileQuery() {
 
     const query = useQuery({
         queryKey: ["auth", "me"],
-        queryFn: getProfileApi,
+        queryFn: getProfileService,
         retry: false,
         staleTime: 60_000,
         enabled: hasToken,

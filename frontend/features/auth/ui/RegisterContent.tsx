@@ -1,48 +1,33 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Logo } from "@/features/shared/ui/Logo";
-import { useVerifyOtp } from "../hooks/useVerifyOtp";
-import { useResendOtp } from "../hooks/useResendOtp";
-import { verifyOtpSchema, VerifyOtpFormData } from "../schemas/authSchemas";
+import { useRegister } from "../hooks/useRegister";
+import { registerSchema, RegisterFormData } from "../schemas/authSchemas";
 
-export default function VerifyOtpContent() {
+export default function RegisterContent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const mobile = searchParams.get("mobile") || "";
-
-  const { mutate: verifyOtp, isPending, error } = useVerifyOtp();
-  const { mutate: resendOtp, isPending: isResending } = useResendOtp();
+  const { mutate: register, isPending, error } = useRegister();
 
   const {
-    register,
+    register: registerField,
     handleSubmit,
     formState: { errors },
-  } = useForm<VerifyOtpFormData>({
-    resolver: zodResolver(verifyOtpSchema),
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
     mode: "onChange",
   });
 
-  const onSubmit = (data: VerifyOtpFormData) => {
-    if (!mobile) {
-      return;
-    }
-    verifyOtp(
-      { mobile, code: data.code },
-      {
-        onSuccess: () => {
-          router.push("/login");
-        },
-      }
-    );
-  };
-
-  const handleResend = () => {
-    if (mobile) {
-      resendOtp(mobile);
-    }
+  const onSubmit = (data: RegisterFormData) => {
+    register(data, {
+      onSuccess: (response) => {
+        if (response.requires_verification) {
+          router.push(`/verify-otp?mobile=${data.mobile_number}`);
+        }
+      },
+    });
   };
 
   const errorMessage = (error as any)?.response?.data?.detail || "";
@@ -52,21 +37,34 @@ export default function VerifyOtpContent() {
       <Logo className="absolute text-5xl top-40 text-blue-200" />
       <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl w-full max-w-md py-8 px-3 lg:px-8 border border-white/20">
         <h1 className="text-2xl font-bold text-center text-white mb-8">
-          تایید کد ارسال‌شده
+          ثبت نام
         </h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div className="relative">
             <input
               type="text"
-              placeholder="کد تایید را وارد کنید"
-              className="w-full bg-white/90 text-gray-800 placeholder-gray-500 border-0 rounded-xl px-4 py-3 text-center text-lg focus:ring-2 focus:ring-blue-300 focus:outline-none transition-all tracking-widest"
-              maxLength={6}
-              {...register("code")}
+              placeholder="شماره موبایل"
+              className="w-full bg-white/90 text-gray-800 placeholder-gray-500 border-0 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-300 focus:outline-none transition-all"
+              {...registerField("mobile_number")}
             />
-            {errors.code && (
-              <p className="text-red-200 text-xs mt-1 text-center">
-                {errors.code.message}
+            {errors.mobile_number && (
+              <p className="text-red-200 text-xs mt-1 mr-2">
+                {errors.mobile_number.message}
+              </p>
+            )}
+          </div>
+
+          <div className="relative">
+            <input
+              type="password"
+              placeholder="رمز عبور"
+              className="w-full bg-white/90 text-gray-800 placeholder-gray-500 border-0 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-300 focus:outline-none transition-all"
+              {...registerField("password")}
+            />
+            {errors.password && (
+              <p className="text-red-200 text-xs mt-1 mr-2">
+                {errors.password.message}
               </p>
             )}
           </div>
@@ -99,29 +97,27 @@ export default function VerifyOtpContent() {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   />
                 </svg>
-                در حال تایید...
+                در حال ثبت نام...
               </span>
             ) : (
-              "تایید"
+              "ثبت نام"
             )}
           </button>
 
-          {(errorMessage || errors.code) && (
+          {(errorMessage || errors.mobile_number || errors.password) && (
             <div className="bg-red-500/20 border border-red-400/30 text-red-100 text-sm py-2 px-4 rounded-lg text-center">
-              {errorMessage || "لطفاً کد تایید را صحیح وارد کنید"}
+              {errorMessage || "لطفاً اطلاعات را صحیح وارد کنید"}
             </div>
           )}
 
           <div className="text-center mt-6">
             <p className="text-blue-100 text-sm">
-              کد را دریافت نکردید؟{" "}
+              اگر حساب کاربری دارید،{" "}
               <span
-                className={`font-semibold hover:text-white cursor-pointer transition-colors ${
-                  isResending ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-                onClick={!isResending ? handleResend : undefined}
+                className="font-semibold hover:text-white cursor-pointer transition-colors"
+                onClick={() => router.push("/login")}
               >
-                {isResending ? "در حال ارسال..." : "ارسال مجدد"}
+                اینجا وارد شوید
               </span>
             </p>
           </div>
