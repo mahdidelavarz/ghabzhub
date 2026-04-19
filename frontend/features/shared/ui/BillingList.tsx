@@ -54,7 +54,7 @@ export function BillingList({
                       <LocalIcon
                         name={service.icon as any}
                         size={55}
-                        className="w-[70px] h-[70px] p-3 bg-custom-whitesmoke rounded-2xl"
+                        className="w-17.5 h-17.5 p-3 bg-custom-whitesmoke rounded-2xl"
                         // color={color}
                       />
                       <p className="text-xs mt-2">{service.label}</p>
