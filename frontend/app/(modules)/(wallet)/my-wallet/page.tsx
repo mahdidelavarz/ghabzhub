@@ -1,5 +1,5 @@
 "use client";
-import { usePNEIdentifier } from "@/features/modules/plateNumber/hooks/usePlateNumber";
+import { usePNEIdentifier } from "@/features/modules/plateNumber/hooks/usePNEResult";
 import { useGetPaymentUrl } from "@/features/modules/plateNumber/hooks/useGetPaymentUrl";
 import { usePlateStore } from "@/features/modules/plateNumber/store/plateStore";
 import FormButton from "@/features/shared/ui/FormButton";

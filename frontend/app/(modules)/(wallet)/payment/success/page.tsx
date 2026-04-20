@@ -2,41 +2,26 @@
 import { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { usePlateStore } from "@/features/modules/plateNumber/store/plateStore";
-import { usePNEIdentifier } from "@/features/modules/plateNumber/hooks/usePlateNumber";
+
 import FormButton from "@/features/shared/ui/FormButton";
-import { LocalIcon } from "@/features/shared/icons/localIcon";
+import { usePNEResultQuery } from "@/features/modules/plateNumber/hooks/usePNEResult";
 
 function SuccessContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const orderId = searchParams.get("order_id");
-  const { nationalNumber, phoneNumber, clearPlateData, setOrderId } = usePlateStore();
-  const { mutate: submitPayment, isPending } = usePNEIdentifier();
+  const { nationalNumber, phoneNumber, clearPlateData, setOrderId } =
+    usePlateStore();
+  const { data, isLoading } = usePNEResultQuery();
 
   useEffect(() => {
-    if (orderId) {
-      setOrderId(orderId);
-      
-      // Call the PNE identifier service with the order_id
-      submitPayment(
-        {
-          nationalIdentifier: Number(nationalNumber),
-          mobileNumber: Number(phoneNumber),
-        },
-        {
-          onSuccess: (result) => {
-            clearPlateData();
-          },
-          onError: () => {
-            // Error will be handled by the hook
-          },
-        }
-      );
+    if (data) {
+      setOrderId(orderId || "");
     }
-  }, [orderId, submitPayment, nationalNumber, phoneNumber, clearPlateData, setOrderId]);
+  }, [orderId]);
 
   const handleViewResults = () => {
-    router.push("/plate/results");
+    router.push("/plate-number/results");
   };
 
   const handleBackToHome = () => {
@@ -55,8 +40,8 @@ function SuccessContent() {
         <p className="text-gray-600 mb-6">
           اطلاعات استعلام شما در حال پردازش است
         </p>
-        
-        {isPending ? (
+
+        {isLoading ? (
           <div className="flex justify-center mb-6">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
           </div>
@@ -82,13 +67,15 @@ function SuccessContent() {
 
 export default function SuccessPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          </div>
         </div>
-      </div>
-    }>
+      }
+    >
       <SuccessContent />
     </Suspense>
   );

@@ -1,12 +1,12 @@
 // features/modules/plateNumber/results/page.tsx
 "use client";
 
-import { useRouter } from "next/navigation";
+
 import { Logo } from "@/features/shared/ui/Logo";
-import FormButton from "@/features/shared/ui/FormButton";
+import { usePNEResultQuery } from "@/features/modules/plateNumber/hooks/usePNEResult";
 
 export default function PlateResultsPage() {
-  const router = useRouter();
+  const { data } = usePNEResultQuery();
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
@@ -32,12 +32,7 @@ export default function PlateResultsPage() {
         <p className="text-slate-500 mb-6">
           لیست پلاک‌های فعال شما در اینجا نمایش داده می‌شود.
         </p>
-
-        <FormButton
-          label="مشاهده جزئیات"
-          onClick={() => router.push("/plate/list")}
-          loading={false}
-        />
+        {data}
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const http = axios.create({
   baseURL: process.env.NEXT_PUBLIC_URL,
-  withCredentials: true,
+  // withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },

@@ -2,7 +2,7 @@
 import { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { usePlateStore } from "@/features/modules/plateNumber/store/plateStore";
-import { usePNEIdentifier } from "@/features/modules/plateNumber/hooks/usePlateNumber";
+import { usePNEIdentifier } from "@/features/modules/plateNumber/hooks/usePNEResult";
 import toast from "react-hot-toast";
 
 function PaymentCallbackContent() {
@@ -25,6 +25,7 @@ function PaymentCallbackContent() {
     switch (status) {
       case "success":
       case "processing":
+      case "OK":
         // Payment successful
         if (orderId) {
           setOrderId(orderId);
