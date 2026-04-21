@@ -12,6 +12,7 @@ function PaymentCallbackContent() {
 
 
   const {orderId } = usePlateStore();
+  console.log(orderId , 'order id in callback')
 
   useEffect(() => {
     if (status === "processing" || status === "success" || status === "OK") {
@@ -19,7 +20,7 @@ function PaymentCallbackContent() {
       if (orderId) {
         router.replace(`/payment/success?order_id=${orderId}`);
       } else {
-        toast.error("اطلاعات پرداخت کامل نیست");
+        // toast.error("اطلاعات پرداخت کامل نیست");
         router.replace("/payment/error");
       }
     } else if (status === "failed") {

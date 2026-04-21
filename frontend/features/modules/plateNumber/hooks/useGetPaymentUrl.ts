@@ -7,7 +7,7 @@ export const useGetPaymentUrl = () => {
   const setOrderId = usePlateStore((s) => s.setOrderId);
   
   return useMutation({
-    mutationFn: (amount: number) => getPaymentUrlService(amount),
+    mutationFn: (nationalCode: string) => getPaymentUrlService(nationalCode),
     onSuccess: (data) => {
       if (data.order_id) {
         console.log(data , 'data for orderId')

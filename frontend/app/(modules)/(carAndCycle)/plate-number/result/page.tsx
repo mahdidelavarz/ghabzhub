@@ -12,7 +12,7 @@ function PlateResultsContent() {
   const router = useRouter();
   const { orderId } = usePlateStore();
   const { data, isLoading, error } = usePNEResultQuery(orderId);
-
+  console.log(data, "result");
   const handleBackToHome = () => {
     router.push("/");
   };
@@ -30,9 +30,7 @@ function PlateResultsContent() {
           <h2 className="text-xl font-semibold text-gray-800 mb-2">
             در حال دریافت اطلاعات پلاک‌ها...
           </h2>
-          <p className="text-gray-600">
-            لطفاً چند لحظه صبر کنید
-          </p>
+          <p className="text-gray-600">لطفاً چند لحظه صبر کنید</p>
         </div>
       </div>
     );
@@ -75,9 +73,17 @@ function PlateResultsContent() {
   }
 
   // Check if data exists and has results
-  const plates = data?.result?.body || [];
+  // جایگزینی بخش قبلی دسترسی به plates
+  const parsedResult =
+    typeof data?.result === "string" ? JSON.parse(data.result) : data?.result;
+  const plates = Array.isArray(parsedResult?.body)
+    ? parsedResult.body
+    : parsedResult?.plateNum
+      ? [parsedResult]
+      : [];
+
   const hasResults = plates.length > 0;
-  const trackId = data?.trackId;
+  const trackId = data?.trackId; // اگر در ریسپانس وجود داشت
 
   // Helper function to get status color and text
   const getStatusInfo = (status: { id: number; description: string }) => {
@@ -86,19 +92,19 @@ function PlateResultsContent() {
         return {
           color: "bg-green-100 text-green-700",
           icon: "✓",
-          text: status.description || "داراي مالک - نصب برروي وسيله"
+          text: status.description || "داراي مالک - نصب برروي وسيله",
         };
       default:
         return {
           color: "bg-yellow-100 text-yellow-700",
           icon: "!",
-          text: status.description || "وضعیت نامشخص"
+          text: status.description || "وضعیت نامشخص",
         };
     }
   };
 
   return (
-    <div className="min-h-140 bg-gray-50 flex flex-col items-center justify-center p-4">
+    <div className="min-h-120 bg-gray-50 flex flex-col items-center justify-center p-4">
       <Logo className="absolute top-6 text-blue-600" />
 
       <div className="bg-white rounded-2xl shadow-lg w-full max-w-2xl p-6 mt-16">
@@ -122,9 +128,7 @@ function PlateResultsContent() {
             نتیجه استعلام پلاک
           </h2>
           {trackId && (
-            <p className="text-xs text-gray-400 mt-1">
-              کد پیگیری: {trackId}
-            </p>
+            <p className="text-xs text-gray-400 mt-1">کد پیگیری: {trackId}</p>
           )}
         </div>
 
@@ -136,23 +140,27 @@ function PlateResultsContent() {
           <div className="space-y-4">
             {plates.map((plate: any, index: number) => {
               const statusInfo = getStatusInfo(plate.plateStatus);
-              
+
               return (
                 <div
                   key={plate.plateId || index}
                   className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
                 >
-                  <div className="flex justify-between items-start mb-3">
+                  <div className="min-w-70 flex flex-col justify-between items-start mb-3 gap-3">
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
                         <span className="font-bold text-lg text-blue-600">
-                          {plate.convertedPlateNum || plate.plateNum || "پلاک نامشخص"}
+                          {plate.convertedPlateNum ||
+                            plate.plateNum ||
+                            "پلاک نامشخص"}
                         </span>
                       </div>
                       <div className="grid grid-cols-1 gap-2 text-sm">
                         <div className="flex items-center gap-2">
                           <span className="text-gray-400">شماره پلاک:</span>
-                          <span className="text-gray-700">{plate.plateNum}</span>
+                          <span className="text-gray-700">
+                            {plate.plateNum}
+                          </span>
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="text-gray-400">شناسه پلاک:</span>

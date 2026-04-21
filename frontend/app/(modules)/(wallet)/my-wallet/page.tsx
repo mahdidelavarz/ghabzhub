@@ -43,15 +43,8 @@ function WalletPage() {
   }, [paymentData, router]);
 
   const handlePayment = async () => {
-    const amountValue = parseInt(amount);
-
-    if (!amountValue || amountValue <= 0) {
-      toast.error("مبلغ وارد شده معتبر نیست");
-      return;
-    }
-
     // Get payment URL with the amount in the request body
-    getPaymentUrl(amountValue);
+    getPaymentUrl(nationalNumber);
   };
 
   return (
