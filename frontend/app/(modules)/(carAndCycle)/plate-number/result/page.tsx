@@ -1,17 +1,18 @@
 "use client";
 
-import { Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { Logo } from "@/features/shared/ui/Logo";
 import { usePNEResultQuery } from "@/features/modules/plateNumber/hooks/usePNEResult";
 import { usePlateStore } from "@/features/modules/plateNumber/store/plateStore";
 import FormButton from "@/features/shared/ui/FormButton";
 
-function PlateResultsContent() {
+export default function PlateResultsPage() {
   const router = useRouter();
   const { orderId } = usePlateStore();
   const { data, isLoading, error } = usePNEResultQuery(orderId);
+  
   console.log(data, "result");
+  
   const handleBackToHome = () => {
     router.push("/");
   };
@@ -72,7 +73,6 @@ function PlateResultsContent() {
   }
 
   // Check if data exists and has results
-  // جایگزینی بخش قبلی دسترسی به plates
   const parsedResult =
     typeof data?.result === "string" ? JSON.parse(data.result) : data?.result;
   const plates = Array.isArray(parsedResult?.body)
@@ -82,9 +82,8 @@ function PlateResultsContent() {
       : [];
 
   const hasResults = plates.length > 0;
-  const trackId = data?.trackId; // اگر در ریسپانس وجود داشت
+  const trackId = data?.trackId;
 
-  // Helper function to get status color and text
   const getStatusInfo = (status: { id: number; description: string }) => {
     switch (status.id) {
       case 8:
@@ -103,7 +102,7 @@ function PlateResultsContent() {
   };
 
   return (
-    <div className="min-h-200 min-w-80 md:min-w-120 lg:min-w-180 bg-gray-50 flex flex-col items-center justify-center p-4 ">
+    <div className="min-h-200 min-w-80 md:min-w-120 lg:min-w-180 bg-gray-50 flex flex-col items-center justify-center p-4">
       <Logo className="absolute top-6 text-blue-600" />
 
       <div className="bg-white rounded-2xl shadow-lg w-full max-w-2xl p-6 mt-16">
@@ -168,9 +167,7 @@ function PlateResultsContent() {
                       </div>
                     </div>
                     <div className="flex flex-col items-end gap-2">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${statusInfo.color}`}
-                      >
+                      <span className={statusInfo.color}>
                         {statusInfo.text}
                       </span>
                     </div>
@@ -200,22 +197,5 @@ function PlateResultsContent() {
         </div>
       </div>
     </div>
-  );
-}
-
-export default function PlateResultsPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
-          <Logo className="absolute top-6 text-blue-600" />
-          <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 mt-16 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          </div>
-        </div>
-      }
-    >
-      <PlateResultsContent />
-    </Suspense>
   );
 }

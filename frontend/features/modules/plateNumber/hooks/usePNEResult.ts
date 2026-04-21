@@ -9,5 +9,8 @@ export function usePNEResultQuery(orderId: string | null) {
     retry: false,
     staleTime: 60_000,
     enabled: !!orderId,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    refetchOnMount: false,
   });
 }
