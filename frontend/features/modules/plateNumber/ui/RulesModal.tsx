@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FormButton from "@/features/shared/ui/FormButton";
 import { useRouter } from "next/navigation";
-import { usePlateStore } from "../store/plateStore";
+
 
 function RulesModal({
   showModal,
