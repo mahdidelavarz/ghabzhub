@@ -2,8 +2,9 @@
 import { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { usePlateStore } from "@/features/modules/plateNumber/store/plateStore";
-import { usePNEIdentifier } from "@/features/modules/plateNumber/hooks/usePNEResult";
+
 import toast from "react-hot-toast";
+import { usePNEResultQuery } from "@/features/modules/plateNumber/hooks/usePNEResult";
 
 function PaymentCallbackContent() {
   const router = useRouter();
@@ -18,7 +19,7 @@ function PaymentCallbackContent() {
 
   const { nationalNumber, phoneNumber, clearPlateData, setOrderId } =
     usePlateStore();
-  const { mutate: submitPayment, isPending } = usePNEIdentifier();
+  const {data , isLoading} = usePNEResultQuery();
 
   useEffect(() => {
     // Handle different statuses from backend
@@ -29,23 +30,8 @@ function PaymentCallbackContent() {
         // Payment successful
         if (orderId) {
           setOrderId(orderId);
-          submitPayment(
-            {
-              nationalIdentifier: Number(nationalNumber),
-              mobileNumber: Number(phoneNumber),
-            },
-            {
-              onSuccess: (result) => {
-                clearPlateData();
-                toast.success("استعلام با موفقیت انجام شد");
-                router.push("/plate-number/results");
-              },
-              onError: () => {
-                toast.error("خطا در انجام استعلام");
-                router.push("/plate-number");
-              },
-            },
-          );
+          toast.success('استعلام با موفقیت انجام شد.')
+          router.push('/plate-number/result')
         } else {
           toast.error("اطلاعات پرداخت کامل نیست");
           router.push("/payment/error");
@@ -73,7 +59,6 @@ function PaymentCallbackContent() {
     status,
     orderId,
     message,
-    submitPayment,
     nationalNumber,
     phoneNumber,
     clearPlateData,
@@ -85,7 +70,7 @@ function PaymentCallbackContent() {
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
         <h2 className="text-xl font-semibold mb-4">
-          {isPending ? "در حال استعلام پلاک..." : "در حال پردازش..."}
+          {isLoading ? "در حال استعلام پلاک..." : "در حال پردازش..."}
         </h2>
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
         <p className="mt-4 text-gray-600">لطفاً چند لحظه صبر کنید...</p>
