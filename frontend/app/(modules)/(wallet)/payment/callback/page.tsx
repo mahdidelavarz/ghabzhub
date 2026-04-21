@@ -12,20 +12,20 @@ function PaymentCallbackContent() {
   // Get parameters from the URL
   const status = searchParams.get("status");
   const message = searchParams.get("message");
+  const orderIdParam = searchParams.get("order_id");
 
   const { setOrderId } = usePlateStore();
 
   useEffect(() => {
     // Handle different statuses from backend
     switch (status) {
+      case "processing":
       case "success":
       case "OK":
         // Payment successful
-        if (orderId) {
-          // Save order_id to store
-          setOrderId(orderId);
+        if (orderIdParam) {
+          setOrderId(orderIdParam);
           toast.success('پرداخت با موفقیت انجام شد. در حال هدایت به صفحه نتایج...');
-          // Navigate to result page with order_id
           router.replace(`/plate-number/result?order_id=${orderId}`);
         } else {
           toast.error("اطلاعات پرداخت کامل نیست");
@@ -52,7 +52,7 @@ function PaymentCallbackContent() {
     }
   }, [status, orderId, message, setOrderId, router]);
 
-  // Show loading spinner while processing
+
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
