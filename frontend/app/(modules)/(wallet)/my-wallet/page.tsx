@@ -30,7 +30,7 @@ function WalletPage() {
     if (price) {
       setAmount(price.toString());
     }
-  }, [nationalNumber, phoneNumber, price, router]);
+  }, []);
 
   // After getting payment URL, redirect the user
   // Update the useEffect that handles paymentData

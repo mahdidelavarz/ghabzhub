@@ -1,7 +1,9 @@
 import { useState } from "react";
 import FormButton from "@/features/shared/ui/FormButton";
 import { useRouter } from "next/navigation";
-
+import { usePlateStore } from "../store/plateStore";
+import { useGetPrice } from "../hooks/useGetPrice";
+import toast from "react-hot-toast";
 
 function RulesModal({
   showModal,
@@ -12,11 +14,25 @@ function RulesModal({
 }) {
   const router = useRouter();
   const [accepted, setAccepted] = useState(false);
+  const { mutate: getPrice, isPending: isPriceLoading } = useGetPrice();
+  const setPrice = usePlateStore((s) => s.setPrice);
 
   const handleAccept = () => {
     if (!accepted) return;
-    router.push("/my-wallet");
-    setShowModal(false);
+    
+    // Call getPrice API
+    getPrice(undefined, {
+      onSuccess: (priceData) => {
+        // Set price in store
+        setPrice(priceData.price);
+        // Navigate to wallet page
+        router.push("/my-wallet");
+        setShowModal(false);
+      },
+      onError: () => {
+        toast.error("دریافت مبلغ استعلام با خطا مواجه شد");
+      },
+    });
   };
 
   return (
@@ -72,8 +88,8 @@ function RulesModal({
           type="button"
           label="تایید و ادامه"
           onClick={handleAccept}
-          disabled={!accepted}
-          loading={false}
+          disabled={!accepted || isPriceLoading}
+          loading={isPriceLoading}
         />
       </div>
     </div>

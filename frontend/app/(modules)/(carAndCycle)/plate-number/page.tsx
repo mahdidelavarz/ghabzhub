@@ -11,48 +11,32 @@ import FormInput from "@/features/shared/ui/FormInput";
 import FormButton from "@/features/shared/ui/FormButton";
 import RulesModal from "@/features/modules/plateNumber/ui/RulesModal";
 import { usePlateStore } from "@/features/modules/plateNumber/store/plateStore";
-import { useGetPrice } from "@/features/modules/plateNumber/hooks/useGetPrice";
 import {
   PlateFormData,
   plateFormSchema,
 } from "@/features/modules/plateNumber/schemas/plateFormSchema";
-import toast from "react-hot-toast";
 
 function PlateNumberPage() {
-  const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const setPlateData = usePlateStore((s) => s.setPlateData);
-  const setPrice = usePlateStore((s) => s.setPrice);
-  const { mutate: getPrice, isPending: isPriceLoading } = useGetPrice();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm<PlateFormData>({
     resolver: zodResolver(plateFormSchema),
     mode: "onChange",
   });
 
   const onSubmit = (data: PlateFormData) => {
-    // First, get the price
-    getPrice(undefined, {
-      onSuccess: (priceData) => {
-        // Save price to store
-        setPrice(priceData.price);
-        // Save user data to store
-        setPlateData({
-          nationalNumber: data.nationalNumber,
-          phoneNumber: data.phoneNumber,
-        });
-        // Show the modal
-        setShowModal(true);
-      },
-      onError: () => {
-        toast.error("دریافت مبلغ استعلام با خطا مواجه شد");
-      },
+    // Save user data to store (only nationalNumber and phoneNumber)
+    setPlateData({
+      nationalNumber: data.nationalNumber,
+      phoneNumber: data.phoneNumber,
     });
+    // Show the modal
+    setShowModal(true);
   };
 
   return (
@@ -108,8 +92,7 @@ function PlateNumberPage() {
             </div>
             <FormButton
               label="استعلام پلاک‌های فعال"
-              onClick={handleSubmit(onSubmit)}
-              loading={isPriceLoading}
+              loading={false}
               type="submit"
             />
           </form>

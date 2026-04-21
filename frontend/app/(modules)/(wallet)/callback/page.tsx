@@ -2,78 +2,67 @@
 import { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { usePlateStore } from "@/features/modules/plateNumber/store/plateStore";
-
 import toast from "react-hot-toast";
-import { usePNEResultQuery } from "@/features/modules/plateNumber/hooks/usePNEResult";
 
 function PaymentCallbackContent() {
+  const {orderId} = usePlateStore();
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Get all parameters from the URL
+  // Get parameters from the URL
   const status = searchParams.get("status");
-  const orderId = searchParams.get("order_id");
-  const paymentId = searchParams.get("payment_id");
   const message = searchParams.get("message");
-  const amount = searchParams.get("amount");
 
-  const { nationalNumber, phoneNumber, clearPlateData, setOrderId } =
-    usePlateStore();
-  const {data , isLoading} = usePNEResultQuery();
+  const { setOrderId } = usePlateStore();
 
   useEffect(() => {
     // Handle different statuses from backend
     switch (status) {
       case "success":
-      case "processing":
       case "OK":
         // Payment successful
         if (orderId) {
+          // Save order_id to store
           setOrderId(orderId);
-          toast.success('استعلام با موفقیت انجام شد.')
-          router.push('/plate-number/result')
+          toast.success('پرداخت با موفقیت انجام شد. در حال هدایت به صفحه نتایج...');
+          // Navigate to result page with order_id
+          router.replace(`/plate-number/result?order_id=${orderId}`);
         } else {
           toast.error("اطلاعات پرداخت کامل نیست");
-          router.push("/payment/error");
+          router.replace("/payment/error");
         }
         break;
 
       case "failed":
         // Payment failed
         toast.error(message || "پرداخت ناموفق بود");
-        router.push("/payment/failed");
+        router.replace("/payment/failed");
         break;
 
       case "error":
         // Technical error
         toast.error(message || "خطا در پردازش پرداخت");
-        router.push("/payment/error");
+        router.replace("/payment/error");
         break;
 
       default:
         // Unknown status
         toast.error("وضعیت نامشخص پرداخت");
-        router.push("/payment/error");
+        router.replace("/payment/error");
     }
-  }, [
-    status,
-    orderId,
-    message,
-    nationalNumber,
-    phoneNumber,
-    clearPlateData,
-    setOrderId,
-    router,
-  ]);
+  }, [status, orderId, message, setOrderId, router]);
 
+  // Show loading spinner while processing
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
-        <h2 className="text-xl font-semibold mb-4">
-          {isLoading ? "در حال استعلام پلاک..." : "در حال پردازش..."}
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+        <h2 className="text-xl font-semibold text-gray-800 mb-2">
+          در حال پردازش پرداخت...
         </h2>
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-        <p className="mt-4 text-gray-600">لطفاً چند لحظه صبر کنید...</p>
+        <p className="text-gray-600">
+          لطفاً چند لحظه صبر کنید
+        </p>
       </div>
     </div>
   );

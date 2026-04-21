@@ -9,7 +9,6 @@ export const useGetPaymentUrl = () => {
   return useMutation({
     mutationFn: (amount: number) => getPaymentUrlService(amount),
     onSuccess: (data) => {
-      // Save the order_id from the response
       if (data.order_id) {
         setOrderId(data.order_id.toString());
       }
