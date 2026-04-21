@@ -1,4 +1,3 @@
-// features/modules/plateNumber/results/page.tsx
 "use client";
 
 import { Suspense } from "react";
@@ -104,7 +103,7 @@ function PlateResultsContent() {
   };
 
   return (
-    <div className="min-h-120 bg-gray-50 flex flex-col items-center justify-center p-4">
+    <div className="min-h-200 min-w-80 md:min-w-120 lg:min-w-180 bg-gray-50 flex flex-col items-center justify-center p-4 ">
       <Logo className="absolute top-6 text-blue-600" />
 
       <div className="bg-white rounded-2xl shadow-lg w-full max-w-2xl p-6 mt-16">
