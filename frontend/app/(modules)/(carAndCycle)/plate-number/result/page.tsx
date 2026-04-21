@@ -98,7 +98,7 @@ function PlateResultsContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+    <div className="min-h-140 bg-gray-50 flex flex-col items-center justify-center p-4">
       <Logo className="absolute top-6 text-blue-600" />
 
       <div className="bg-white rounded-2xl shadow-lg w-full max-w-2xl p-6 mt-16">
@@ -174,7 +174,7 @@ function PlateResultsContent() {
           </div>
         )}
 
-        <div className="mt-6 pt-4 border-t border-gray-200 flex gap-3">
+        <div className="mt-6 pt-4 border-t border-gray-200 flex flex-col gap-3">
           <div className="flex-1">
             <FormButton
               label="بازگشت به صفحه اصلی"
