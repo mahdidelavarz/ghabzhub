@@ -1,5 +1,5 @@
 "use client";
-import { usePNEIdentifier } from "@/features/modules/plateNumber/hooks/usePNEResult";
+
 import { useGetPaymentUrl } from "@/features/modules/plateNumber/hooks/useGetPaymentUrl";
 import { usePlateStore } from "@/features/modules/plateNumber/store/plateStore";
 import FormButton from "@/features/shared/ui/FormButton";
@@ -19,8 +19,7 @@ function WalletPage() {
     isPending: isPaymentUrlLoading,
     data: paymentData,
   } = useGetPaymentUrl();
-  const { mutate: submitPayment, isPending: isSubmitPending } =
-    usePNEIdentifier();
+  
   const [amount, setAmount] = useState<string>("");
 
   useEffect(() => {
@@ -126,7 +125,7 @@ function WalletPage() {
           </div>
           <WalletPaySubmit
             handleConfirm={handlePayment}
-            isPending={isPaymentUrlLoading || isSubmitPending}
+            isPending={isPaymentUrlLoading}
             amount={amount}
           />
         </div>
