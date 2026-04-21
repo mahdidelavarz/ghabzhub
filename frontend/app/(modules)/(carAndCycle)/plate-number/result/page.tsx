@@ -11,25 +11,26 @@ import FormButton from "@/features/shared/ui/FormButton";
 function PlateResultsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const orderIdFromUrl = searchParams.get("order_id");
+  // const orderIdFromUrl = searchParams.get("order_id");
   const { orderId: orderIdFromStore, setOrderId } = usePlateStore();
   
   // Use orderId from URL first, then from store
-  const orderId = orderIdFromUrl || orderIdFromStore;
+  const orderId =  orderIdFromStore;
   
   const { data, isLoading, error } = usePNEResultQuery(orderId);
+  console.log(data)
 
   useEffect(() => {
     // If we have orderId from URL but not in store, save it
-    if (orderIdFromUrl && !orderIdFromStore) {
-      setOrderId(orderIdFromUrl);
-    }
+    // if (orderIdFromUrl && !orderIdFromStore) {
+    //   setOrderId(orderIdFromUrl);
+    // }
     
     // If no orderId at all, redirect back to plate number page
-    if (!orderId) {
-      router.push("/plate-number");
-    }
-  }, [orderId, orderIdFromUrl, orderIdFromStore, setOrderId, router]);
+    // if (!orderId) {
+    //   router.push("/plate-number");
+    // }
+  }, [orderId, orderIdFromStore, setOrderId, router]);
 
   const handleBackToHome = () => {
     router.push("/");

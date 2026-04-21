@@ -7,8 +7,6 @@ import toast from "react-hot-toast";
 function PaymentCallbackContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  // Get parameters from the URL (注意: 后端返回的是 Status 大写 S)
   const status = searchParams.get("Status") || searchParams.get("status");
   const message = searchParams.get("message");
   const orderIdParam = searchParams.get("order_id");

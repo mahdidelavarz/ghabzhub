@@ -1,3 +1,4 @@
+// features/auth/hooks/useLogin.ts
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -8,13 +9,15 @@ import { useAuthStore } from "../store/authStore";
 export const useLogin = () => {
   const router = useRouter();
   const setUser = useAuthStore((s) => s.setUser);
+  const setToken = useAuthStore((s) => s.setToken);
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (data: LoginPayload) => loginService(data),
     onSuccess: (data, variables) => {
-      // Store token
+      // Store token in both localStorage and store
       localStorage.setItem("access_token", data.access_token);
+      setToken(data.access_token);
       
       // Set user in store
       const user = data.user;
