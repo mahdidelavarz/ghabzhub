@@ -1,20 +1,13 @@
 "use client";
 import { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { usePlateStore } from "@/features/modules/plateNumber/store/plateStore";
 
 function ProcessingContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const paymentUrl = searchParams.get("payment_url");
-  const orderId = searchParams.get("order_id");
-  const { setOrderId } = usePlateStore();
 
   useEffect(() => {
-    if (orderId) {
-      setOrderId(orderId);
-    }
-
     // Redirect to payment gateway after 2 seconds
     const timer = setTimeout(() => {
       if (paymentUrl) {
@@ -25,7 +18,7 @@ function ProcessingContent() {
     }, 2000);
 
     return () => clearTimeout(timer);
-  }, [paymentUrl, orderId, setOrderId, router]);
+  }, [paymentUrl, router]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">

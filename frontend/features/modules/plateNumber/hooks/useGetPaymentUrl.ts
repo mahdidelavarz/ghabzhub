@@ -10,6 +10,7 @@ export const useGetPaymentUrl = () => {
     mutationFn: (amount: number) => getPaymentUrlService(amount),
     onSuccess: (data) => {
       if (data.order_id) {
+        console.log(data , 'data for orderId')
         setOrderId(data.order_id.toString());
       }
       toast.success("درگاه پرداخت با موفقیت ایجاد شد");

@@ -1,8 +1,8 @@
 // features/modules/plateNumber/results/page.tsx
 "use client";
 
-import { useEffect, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+import { useRouter } from "next/navigation";
 import { Logo } from "@/features/shared/ui/Logo";
 import { usePNEResultQuery } from "@/features/modules/plateNumber/hooks/usePNEResult";
 import { usePlateStore } from "@/features/modules/plateNumber/store/plateStore";
@@ -10,27 +10,8 @@ import FormButton from "@/features/shared/ui/FormButton";
 
 function PlateResultsContent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  // const orderIdFromUrl = searchParams.get("order_id");
-  const { orderId: orderIdFromStore, setOrderId } = usePlateStore();
-  
-  // Use orderId from URL first, then from store
-  const orderId =  orderIdFromStore;
-  
+  const { orderId } = usePlateStore();
   const { data, isLoading, error } = usePNEResultQuery(orderId);
-  console.log(data)
-
-  useEffect(() => {
-    // If we have orderId from URL but not in store, save it
-    // if (orderIdFromUrl && !orderIdFromStore) {
-    //   setOrderId(orderIdFromUrl);
-    // }
-    
-    // If no orderId at all, redirect back to plate number page
-    // if (!orderId) {
-    //   router.push("/plate-number");
-    // }
-  }, [orderId, orderIdFromStore, setOrderId, router]);
 
   const handleBackToHome = () => {
     router.push("/");

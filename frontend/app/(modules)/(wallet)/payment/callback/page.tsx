@@ -9,23 +9,15 @@ function PaymentCallbackContent() {
   const searchParams = useSearchParams();
   const status = searchParams.get("Status") || searchParams.get("status");
   const message = searchParams.get("message");
-  const orderIdParam = searchParams.get("order_id");
 
-  const { setOrderId } = usePlateStore();
+
+  const {orderId } = usePlateStore();
 
   useEffect(() => {
-    console.log("Payment callback received:", {
-      status,
-      orderIdParam,
-      message,
-    });
-
-   
     if (status === "processing" || status === "success" || status === "OK") {
      
-      if (orderIdParam) {
-        setOrderId(orderIdParam);
-        router.replace(`/payment/success?order_id=${orderIdParam}`);
+      if (orderId) {
+        router.replace(`/payment/success?order_id=${orderId}`);
       } else {
         toast.error("اطلاعات پرداخت کامل نیست");
         router.replace("/payment/error");
@@ -43,7 +35,7 @@ function PaymentCallbackContent() {
       toast.error("وضعیت نامشخص پرداخت");
       router.replace("/payment/error");
     }
-  }, [status, orderIdParam, message, setOrderId, router]);
+  }, [status, message, router , orderId]);
 
   return (
     <div className="min-h-screen flex items-center justify-center">
