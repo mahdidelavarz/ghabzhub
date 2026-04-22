@@ -21,6 +21,21 @@ export default function PlateResultsPage() {
     router.push("/plate-number");
   };
 
+  // Parse the result data
+  const parsedResult = data?.result 
+    ? (typeof data.result === "string" ? JSON.parse(data.result) : data.result)
+    : null;
+  
+  // Extract status from response
+  const responseStatus = parsedResult?.status || data?.status;
+  const plates = Array.isArray(parsedResult?.body)
+    ? parsedResult.body
+    : parsedResult?.plateNum
+      ? [parsedResult]
+      : [];
+  const trackId = data?.trackId;
+
+  // Handle loading state
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
@@ -36,6 +51,7 @@ export default function PlateResultsPage() {
     );
   }
 
+  // Handle error state
   if (error) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
@@ -72,17 +88,84 @@ export default function PlateResultsPage() {
     );
   }
 
-  // Check if data exists and has results
-  const parsedResult =
-    typeof data?.result === "string" ? JSON.parse(data.result) : data?.result;
-  const plates = Array.isArray(parsedResult?.body)
-    ? parsedResult.body
-    : parsedResult?.plateNum
-      ? [parsedResult]
-      : [];
+  // Handle processing status
+  if (responseStatus === "processing" || responseStatus === "pending") {
+    return (
+      <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+        <Logo className="absolute top-6 text-blue-600" />
+        <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 mt-16 text-center">
+          <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg
+              className="w-8 h-8 text-yellow-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <h2 className="text-xl font-bold text-gray-800 mb-2">
+            در حال پردازش استعلام
+          </h2>
+          <p className="text-gray-600 mb-4">
+            استعلام پلاک‌ها در حال انجام است
+          </p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-6 text-blue-600 hover:text-blue-700 text-sm"
+          >
+            بررسی مجدد وضعیت
+          </button>
+        </div>
+      </div>
+    );
+  }
 
+  // Handle failed status
+  if (responseStatus === "failed" || responseStatus === "error") {
+    return (
+      <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+        <Logo className="absolute top-6 text-blue-600" />
+        <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 mt-16 text-center">
+          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg
+              className="w-8 h-8 text-red-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </div>
+          <h2 className="text-xl font-bold text-gray-800 mb-2">
+            استعلام با شکست مواجه شد
+          </h2>
+          <p className="text-gray-600 mb-6">
+            {parsedResult?.message || "متأسفانه استعلام پلاک‌ها انجام نشد"}
+          </p>
+          <FormButton
+            label="تلاش مجدد"
+            onClick={handleTryAgain}
+            loading={false}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // Handle success status with results
   const hasResults = plates.length > 0;
-  const trackId = data?.trackId;
 
   const getStatusInfo = (status: { id: number; description: string }) => {
     switch (status.id) {
@@ -132,6 +215,21 @@ export default function PlateResultsPage() {
 
         {!hasResults ? (
           <div className="text-center py-8">
+            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg
+                className="w-8 h-8 text-gray-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
             <p className="text-gray-500">هیچ پلاکی برای این کد ملی یافت نشد</p>
           </div>
         ) : (

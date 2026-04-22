@@ -12,7 +12,7 @@ export default function SuccessPage() {
     // Auto redirect to results after 3 seconds
     const timer = setTimeout(() => {
       if (orderId) {
-        router.push(`/plate-number/result?order_id=${orderId}`);
+        router.push(`/plate-number/result`);
       } else {
         router.push("/plate-number");
       }
