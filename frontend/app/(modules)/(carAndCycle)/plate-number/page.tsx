@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LocalIcon } from "@/features/shared/icons/localIcon";
@@ -15,10 +15,19 @@ import {
   PlateFormData,
   plateFormSchema,
 } from "@/features/modules/plateNumber/schemas/plateFormSchema";
+import toast from "react-hot-toast";
 
 function PlateNumberPage() {
   const [showModal, setShowModal] = useState(false);
   const setPlateData = usePlateStore((s) => s.setPlateData);
+  const searchParams = useSearchParams();
+  const status = searchParams.get("status");
+
+  useEffect(() => {
+    if (status === "noInfo") {
+      toast.error("اطلاعات شما وارد نشده است!");
+    }
+  }, []);
 
   const {
     register,

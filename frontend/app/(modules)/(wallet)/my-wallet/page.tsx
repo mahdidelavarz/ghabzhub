@@ -8,7 +8,6 @@ import GrayLine from "@/features/shared/ui/GrayLine";
 import { Logo } from "@/features/shared/ui/Logo";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 
 function WalletPage() {
   const router = useRouter();
@@ -24,8 +23,7 @@ function WalletPage() {
 
   useEffect(() => {
     if (!nationalNumber || !phoneNumber) {
-      toast.error("اطلاعات شما وارد نشده است!");
-      router.push("/plate-number");
+      router.push("/plate-number?status=noInfo");
     }
     if (price) {
       setAmount(price.toString());

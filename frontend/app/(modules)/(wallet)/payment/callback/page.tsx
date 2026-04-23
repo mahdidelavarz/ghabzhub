@@ -11,25 +11,27 @@ function PaymentCallbackContent() {
   const status = searchParams.get("Status") || searchParams.get("status");
   const message = searchParams.get("message");
   const hasRedirected = useRef(false);
-
+  console.log(status);
   useEffect(() => {
+    console.log("callback - insideEffect -", status);
     if (hasRedirected.current) return;
 
-    if (status === "success" || status === "OK") {
+    if (status === "success" || status === "OK" || status === "processing") {
+      console.log('is ok')
       hasRedirected.current = true;
       router.replace(`/payment/success`);
-    } else if (status === "processing") {
-      hasRedirected.current = true;
-      router.replace("/payment/processing");
     } else if (status === "failed") {
+      console.log('is fail')
       hasRedirected.current = true;
       toast.error(message || "پرداخت ناموفق بود");
       router.replace("/payment/failed");
     } else if (status === "error") {
+      console.log('is error')
       hasRedirected.current = true;
       toast.error(message || "خطا در پردازش پرداخت");
       router.replace("/payment/error");
     } else {
+      console.log('is else')
       hasRedirected.current = true;
       toast.error("وضعیت نامشخص پرداخت");
       router.replace("/payment/error");
