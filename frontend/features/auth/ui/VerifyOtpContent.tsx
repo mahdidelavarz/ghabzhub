@@ -3,7 +3,6 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Logo } from "@/features/shared/ui/Logo";
 import { useVerifyOtp } from "../hooks/useVerifyOtp";
 import { useResendOtp } from "../hooks/useResendOtp";
 import { verifyOtpSchema, VerifyOtpFormData } from "../schemas/authSchemas";
@@ -33,7 +32,7 @@ export default function VerifyOtpContent() {
       { mobile, code: data.code },
       {
         onSuccess: () => {
-          router.push("/login");
+          router.push("/auth/login");
         },
       }
     );
@@ -48,9 +47,8 @@ export default function VerifyOtpContent() {
   const errorMessage = (error as any)?.response?.data?.detail || "";
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-600 via-blue-400 to-blue-300 p-4">
-      <Logo className="absolute text-5xl top-40 text-blue-200" />
-      <div className="bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl w-full max-w-md py-8 px-3 lg:px-8 border border-white/20">
+    
+      <div className="auth-form-body pt-3 lg:pt-8">
         <h1 className="text-2xl font-bold text-center text-white mb-8">
           تایید کد ارسال‌شده
         </h1>
@@ -127,6 +125,5 @@ export default function VerifyOtpContent() {
           </div>
         </form>
       </div>
-    </div>
   );
 }

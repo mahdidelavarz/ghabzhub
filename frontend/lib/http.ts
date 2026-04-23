@@ -32,7 +32,7 @@ http.interceptors.response.use(
         localStorage.removeItem("plate-storage"); // If you persist plate store
         
         // Redirect to login page
-        window.location.href = "/login";
+        window.location.href = "/auth/login";
         
         // Show toast message
         toast.error("نشست شما منقضی شده است. لطفاً مجدداً وارد شوید");

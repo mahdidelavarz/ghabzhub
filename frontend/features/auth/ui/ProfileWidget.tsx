@@ -30,7 +30,7 @@ export function ProfileWidget() {
   }, []);
 
   const handleProfileClick = () => {
-    router.push("/complete-profile");
+    router.push("/auth/complete-profile");
     setOpen(false);
   };
 
@@ -42,7 +42,7 @@ export function ProfileWidget() {
   if (!user) {
     return (
       <a
-        href="/login"
+        href="/auth/login"
         className="flex items-center gap-3 transition group duration-300 hover:scale-110 relative text-xs"
       >
         <Icon

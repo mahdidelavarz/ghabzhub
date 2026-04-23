@@ -30,7 +30,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
       } else if (!user) {
         toast.error("لطفا ابتدا وارد شوید!");
       }
-      router.push("/login");
+      router.push("/auth/login");
     }
   }, [user, isLoading, isClient, router, isTokenValid, logout]);
 

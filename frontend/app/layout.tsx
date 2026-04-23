@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <div className="max-sm:mb-28">   {/* lg:w-9/12 mx-auto */}
+          <div className="m">
             {children}
           </div>
         </Providers>

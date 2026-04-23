@@ -1,6 +1,6 @@
 import CompleteProfileContent from "@/features/auth/ui/CompleteProfileContent";
+import { ProtectedRoute } from "@/lib/protectedRoute";
 import { Metadata } from "next";
-
 
 export const metadata: Metadata = {
   title: "تکمیل پروفایل | قبضینو",
@@ -13,5 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <CompleteProfileContent />;
+  return (
+    <ProtectedRoute>
+      <CompleteProfileContent />
+    </ProtectedRoute>
+  );
 }

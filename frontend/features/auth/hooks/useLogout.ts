@@ -17,7 +17,7 @@ export function useLogout() {
       logout(); // This clears user, token, and localStorage
       clearPlateData(); // Clear plate data as well
       toast.success("از حساب کاربری خارج شدید");
-      router.push("/login");
+      router.push("/auth/login");
     },
     onError: (error: any) => {
       // Even if API fails, clear local data
@@ -25,7 +25,7 @@ export function useLogout() {
       clearPlateData();
       localStorage.removeItem("access_token");
       toast.error("خروج از حساب انجام شد اما خطایی رخ داد");
-      router.push("/login");
+      router.push("/auth/login");
     },
   });
 }

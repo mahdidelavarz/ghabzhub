@@ -96,7 +96,7 @@ export function NavMobile() {
                 </p>
               ) : (
                 <a
-                  href="/login"
+                  href="/auth/login"
                   className="flex items-center gap-3 transition group duration-300 hover:scale-110 relative text-white"
                 >
                   <LocalIcon
