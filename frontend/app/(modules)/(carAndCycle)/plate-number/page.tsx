@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LocalIcon } from "@/features/shared/icons/localIcon";
@@ -17,17 +17,20 @@ import {
 } from "@/features/modules/plateNumber/schemas/plateFormSchema";
 import toast from "react-hot-toast";
 
-function PlateNumberPage() {
+function PlateNumberContent() {
   const [showModal, setShowModal] = useState(false);
   const setPlateData = usePlateStore((s) => s.setPlateData);
   const searchParams = useSearchParams();
-  const status = searchParams.get("status");
+  const statusRef = useRef(searchParams.get("status"));
+  const status = statusRef.current;
+  const hasShownToast = useRef(false);
 
   useEffect(() => {
-    if (status === "noInfo") {
+    if (status === "noInfo" && hasShownToast.current == false) {
       toast.error("اطلاعات شما وارد نشده است!");
+      hasShownToast.current = true;
     }
-  }, []);
+  }, [status]);
 
   const {
     register,
@@ -125,4 +128,16 @@ function PlateNumberPage() {
   );
 }
 
-export default PlateNumberPage;
+export default function PaymentCallbackPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+        </div>
+      }
+    >
+      <PlateNumberContent />
+    </Suspense>
+  );
+}
