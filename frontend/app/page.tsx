@@ -8,7 +8,7 @@ export default function Home() {
       <NavBar />
       <Header />
       <BillingList
-        cssStyles="grid grid-cols-8 gap-y-7 max-md:grid-cols-4 mt-9"
+        cssStyles="grid grid-cols-8 gap-y-7 max-md:grid-cols-4 mt-9 max-sm:mb-20"
         titles={[
           "خدمات قبض و موبایل",
           "خدمات خودرو و موتور",
