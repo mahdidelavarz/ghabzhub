@@ -6,6 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useVerifyOtp } from "../hooks/useVerifyOtp";
 import { useResendOtp } from "../hooks/useResendOtp";
 import { verifyOtpSchema, VerifyOtpFormData } from "../schemas/authSchemas";
+import { ColorfulLogo } from "@/features/shared/ui/Logo";
+import { LocalIcon } from "@/features/shared/icons/localIcon";
 
 export default function VerifyOtpContent() {
   const router = useRouter();
@@ -34,7 +36,7 @@ export default function VerifyOtpContent() {
         onSuccess: () => {
           router.push("/auth/login");
         },
-      }
+      },
     );
   };
 
@@ -47,83 +49,94 @@ export default function VerifyOtpContent() {
   const errorMessage = (error as any)?.response?.data?.detail || "";
 
   return (
-    
-      <div className="auth-form-body pt-3 lg:pt-8">
-        <h1 className="text-2xl font-bold text-center text-white mb-8">
-          تایید کد ارسال‌شده
-        </h1>
+    <div className="auth-form-body pt-3 lg:pt-6">
+      <div className="w-full flex justify-between ">
+        <div
+          className="w-7 h-7 bg-white rounded-lg flex justify-center items-center cursor-pointer"
+          onClick={() => router.push('/auth/register')}
+        >
+          <LocalIcon name="ArrowDownIcon" className="-rotate-90 text-white" />
+        </div>{" "}
+        <ColorfulLogo />
+      </div>
+      <h1 className="text-2xl font-bold text-center text-white mb-8">
+        تایید کد ارسال‌شده
+      </h1>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="کد تایید را وارد کنید"
-              className="w-full bg-white/90 text-gray-800 placeholder-gray-500 border-0 rounded-xl px-4 py-3 text-center text-lg focus:ring-2 focus:ring-blue-300 focus:outline-none transition-all tracking-widest"
-              maxLength={6}
-              {...register("code")}
-            />
-            {errors.code && (
-              <p className="text-red-200 text-xs mt-1 text-center">
-                {errors.code.message}
-              </p>
-            )}
-          </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="کد تایید را وارد کنید"
+            className="w-full bg-white/90 text-gray-800 placeholder-gray-500 border-0 rounded-xl px-4 py-3 text-center text-lg focus:ring-2 focus:ring-blue-300 focus:outline-none transition-all tracking-widest"
+            maxLength={6}
+            {...register("code")}
+          />
+          {errors.code && (
+            <p className="text-red-200 text-xs mt-1 text-center">
+              {errors.code.message}
+            </p>
+          )}
+        </div>
 
-          <button
-            type="submit"
-            disabled={isPending}
-            className={`w-full py-3.5 rounded-xl font-semibold text-white transition-all duration-300 shadow-lg
+        <button
+          type="submit"
+          disabled={isPending}
+          className={`w-full py-3.5 rounded-xl font-semibold text-white transition-all duration-300 shadow-lg
           ${
             isPending
               ? "bg-blue-400 cursor-not-allowed"
               : "bg-blue-600 hover:bg-blue-700 hover:shadow-blue-500/30 active:scale-[0.98]"
           }`}
-          >
-            {isPending ? (
-              <span className="flex items-center justify-center gap-2">
-                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                    fill="none"
-                  />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  />
-                </svg>
-                در حال تایید...
-              </span>
-            ) : (
-              "تایید"
-            )}
-          </button>
-
-          {(errorMessage || errors.code) && (
-            <div className="bg-red-500/20 border border-red-400/30 text-red-100 text-sm py-2 px-4 rounded-lg text-center">
-              {errorMessage || "لطفاً کد تایید را صحیح وارد کنید"}
-            </div>
+        >
+          {isPending ? (
+            <span className="flex items-center justify-center gap-2">
+              <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  fill="none"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                />
+              </svg>
+              در حال تایید...
+            </span>
+          ) : (
+            "تایید"
           )}
+        </button>
 
-          <div className="text-center mt-6">
-            <p className="text-blue-100 text-sm">
-              کد را دریافت نکردید؟{" "}
-              <span
-                className={`font-semibold hover:text-white cursor-pointer transition-colors ${
-                  isResending ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-                onClick={!isResending ? handleResend : undefined}
-              >
-                {isResending ? "در حال ارسال..." : "ارسال مجدد"}
-              </span>
-            </p>
+        {(errorMessage || errors.code) && (
+          <div className="bg-red-500/20 border border-red-400/30 text-red-100 text-sm py-2 px-4 rounded-lg text-center">
+            {errorMessage || "لطفاً کد تایید را صحیح وارد کنید"}
           </div>
-        </form>
-      </div>
+        )}
+
+        <div className="text-center mt-6">
+          <span className="text-white text-sm">
+            کد تایید به شماره موبایل <b className="">{mobile}</b> ارسال شد.
+          </span>
+          <p className="text-blue-100 text-sm mt-2">
+            کد را دریافت نکردید؟{" "}
+            <span
+              className={`font-semibold hover:text-white cursor-pointer transition-colors ${
+                isResending ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              onClick={!isResending ? handleResend : undefined}
+            >
+              {isResending ? "در حال ارسال..." : "ارسال مجدد"}
+            </span>
+          </p>
+        </div>
+      </form>
+    </div>
   );
 }

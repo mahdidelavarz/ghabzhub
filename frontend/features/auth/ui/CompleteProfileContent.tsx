@@ -47,10 +47,10 @@ export default function CompleteProfileContent() {
   const errorMessage = (error as any)?.response?.data?.detail || "";
 
   return (
-    <div className="auth-form-body pt-3 lg:pt-8">
-      <ColorfulLogo  />
+    <div className="auth-form-body pt-3 lg:pt-6">
+      <ColorfulLogo />
       <h1 className="mt-4 text-2xl font-bold text-center text-white mb-8">
-        تکمیل پروفایل 
+        تکمیل پروفایل
       </h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
