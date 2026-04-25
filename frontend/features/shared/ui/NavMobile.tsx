@@ -49,7 +49,7 @@ export function NavMobile() {
                 >
                   <LocalIcon
                     name={item.icon}
-                    size={40}
+                    size={38}
                     className="text-neutral-700"
                   />
                   <span className="text-sm">{item.label}</span>
@@ -61,7 +61,7 @@ export function NavMobile() {
                 >
                   <LocalIcon
                     name={item.icon}
-                    size={40}
+                    size={38}
                     className="text-neutral-700"
                   />
                   <span className="text-sm">{item.label}</span>
@@ -123,7 +123,7 @@ export function NavMobile() {
                 <div className="flex items-center gap-3">
                   <LocalIcon
                     name={service.icon as any}
-                    size={40}
+                    size={38}
                     // color="#f8fafc"
                     className="p-2 rounded-2xl"
                     // style={{ backgroundColor: service.color }}
@@ -171,7 +171,7 @@ export function NavMobile() {
                 >
                   <LocalIcon
                     name={item.icon as any}
-                    size={40}
+                    size={38}
                     className="p-2 rounded-2xl"
                   />
                   <p className="text-lg">{item.label}</p>
@@ -180,7 +180,7 @@ export function NavMobile() {
                 <a href={item.to} className="flex items-center gap-3">
                   <LocalIcon
                     name={item.icon as any}
-                    size={40}
+                    size={38}
                     className="p-2 rounded-2xl"
                   />
                   <p className="text-lg">{item.label}</p>
