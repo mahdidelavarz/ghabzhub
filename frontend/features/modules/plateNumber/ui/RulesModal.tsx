@@ -14,25 +14,12 @@ function RulesModal({
 }) {
   const router = useRouter();
   const [accepted, setAccepted] = useState(false);
-  const { mutate: getPrice, isPending: isPriceLoading } = useGetPrice();
-  const setPrice = usePlateStore((s) => s.setPrice);
+  const { price } = usePlateStore();
 
   const handleAccept = () => {
     if (!accepted) return;
-    
-    // Call getPrice API
-    getPrice(undefined, {
-      onSuccess: (priceData) => {
-        // Set price in store
-        setPrice(priceData.price);
-        // Navigate to wallet page
-        router.push("/my-wallet");
-        setShowModal(false);
-      },
-      onError: () => {
-        toast.error("دریافت مبلغ استعلام با خطا مواجه شد");
-      },
-    });
+    setShowModal(false);
+    router.push("/my-wallet");
   };
 
   return (
@@ -55,7 +42,7 @@ function RulesModal({
         </div>
 
         <ol className="list-decimal p-5 text-slate-500 space-y-2">
-          <li>هزینه هربار استعلام خدمات پلیس ۱۶.۱۷۰ تومان است.</li>
+          <li>هزینه هربار استعلام خدمات پلیس {price} تومان است.</li>
           <li>
             درحال حاضر استعلام پلاک فعال برای دارندگان موتورسیکلت امکان‌پذیر
             نیست.
@@ -88,8 +75,8 @@ function RulesModal({
           type="button"
           label="تایید و ادامه"
           onClick={handleAccept}
-          disabled={!accepted || isPriceLoading}
-          loading={isPriceLoading}
+          disabled={!accepted}
+          loading={false}
         />
       </div>
     </div>

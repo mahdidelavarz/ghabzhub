@@ -16,6 +16,7 @@ import {
   plateFormSchema,
 } from "@/features/modules/plateNumber/schemas/plateFormSchema";
 import toast from "react-hot-toast";
+import { useGetPrice } from "@/features/modules/plateNumber/hooks/useGetPrice";
 
 function PlateNumberContent() {
   const [showModal, setShowModal] = useState(false);
@@ -24,6 +25,8 @@ function PlateNumberContent() {
   const statusRef = useRef(searchParams.get("status"));
   const status = statusRef.current;
   const hasShownToast = useRef(false);
+  const { mutate: getPrice, isPending: isPriceLoading } = useGetPrice();
+  const setPrice = usePlateStore((s) => s.setPrice);
 
   useEffect(() => {
     if (status === "noInfo" && hasShownToast.current == false) {
@@ -42,13 +45,20 @@ function PlateNumberContent() {
   });
 
   const onSubmit = (data: PlateFormData) => {
-    // Save user data to store (only nationalNumber and phoneNumber)
     setPlateData({
       nationalNumber: data.nationalNumber,
       phoneNumber: data.phoneNumber,
     });
-    // Show the modal
-    setShowModal(true);
+
+    getPrice(undefined, {
+      onSuccess: (priceData) => {
+        setPrice(priceData.price);
+        setShowModal(true);
+      },
+      onError: () => {
+        toast.error("دریافت مبلغ استعلام با خطا مواجه شد");
+      },
+    });
   };
 
   return (
@@ -103,7 +113,7 @@ function PlateNumberContent() {
               )}
             </div>
             <FormButton
-              label="استعلام پلاک‌های فعال"
+              label={isPriceLoading ? "درحال ثبت ..." : "استعلام پلاک‌های فعال"}
               loading={false}
               type="submit"
             />
