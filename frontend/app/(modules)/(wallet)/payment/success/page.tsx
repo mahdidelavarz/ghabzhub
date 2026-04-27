@@ -13,6 +13,7 @@ export default function SuccessPage() {
     const timer = setTimeout(() => {
       if (orderId) {
         router.push(`/plate-number/result`);
+        console.log(orderId , 'orderId in success')
       } else {
         router.push("/plate-number");
       }

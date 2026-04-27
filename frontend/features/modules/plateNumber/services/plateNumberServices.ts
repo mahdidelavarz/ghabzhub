@@ -3,7 +3,7 @@ import { http } from "@/lib/http";
 
 export const PNEResultService = async (orderId: string): Promise<any> => {
   const res = await http.get(API.PNE.PNE_RESULT(orderId));
-  console.log(res.data.result , 'result in service')
+  console.log(res.data.result , 'result in service' , orderId , ':orderid')
   return res.data;
 };
 
