@@ -55,7 +55,7 @@ export function BillingList({
                         name={service.icon as any}
                         size={55}
                         className="w-17.5 h-17.5 p-3 bg-custom-whitesmoke rounded-2xl"
-                        // color={color}
+                        color={color}
                       />
                       <p className="text-xs mt-2">{service.label}</p>
                     </a>
