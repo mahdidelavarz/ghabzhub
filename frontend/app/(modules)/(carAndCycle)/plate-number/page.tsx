@@ -4,7 +4,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LocalIcon } from "@/features/shared/icons/localIcon";
+
 import GrayLine from "@/features/shared/ui/GrayLine";
 import { ProtectedRoute } from "@/lib/protectedRoute";
 import FormInput from "@/features/shared/ui/FormInput";
@@ -17,6 +17,7 @@ import {
 } from "@/features/modules/plateNumber/schemas/plateFormSchema";
 import toast from "react-hot-toast";
 import { useGetPrice } from "@/features/modules/plateNumber/hooks/useGetPrice";
+import { PlateNumberIcon } from "@/features/shared/icons/Icon";
 
 function PlateNumberContent() {
   const [showModal, setShowModal] = useState(false);
@@ -69,9 +70,7 @@ function PlateNumberContent() {
         <div className="w-full h-auto bg-white rounded-2xl shadow-md shadow-gray-100 lg:w-1/2 lg:p-6">
           <GrayLine className="md:hidden" />
           <div className="flex items-center px-3 gap-3 mt-5">
-            <LocalIcon
-              name="plateNumber"
-              size={45}
+            <PlateNumberIcon
               className="w-8 h-8 fill-amber-600 bg-fuchsia-200 rounded-lg"
             />
             <h2 className="font-semibold text-lg">استعلام پلاک فعال ماشین</h2>
@@ -131,7 +130,7 @@ function PlateNumberContent() {
             جزئیاتی مانند تاریخ فک‌شدن، مرکز شماره‌گذاری، وضعیت و شماره سریال را
             مشاهده کنند.
           </p>
-          <LocalIcon name="PlateBg" alt="plate" className="w-full" />
+          {/* <LocalIcon name="PlateBg" alt="plate" className="w-full" /> */}
         </div>
       </div>
     </ProtectedRoute>

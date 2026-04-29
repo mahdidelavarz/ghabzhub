@@ -1,8 +1,10 @@
+import { ReactNode, SVGProps } from "react";
+
 export type ServiceCategoryId = 'billAndMobile' | 'carAndCycle' | 'bank' | 'travel';
 
 type ServiceItem = {
   label: string;
-  icon: string;
+  icon: (props: SVGProps<SVGSVGElement>) => ReactNode | Promise<ReactNode>;
   to: string;
   disabled: boolean;
 };
@@ -10,7 +12,7 @@ type ServiceItem = {
 type Category = {
   id: ServiceCategoryId;
   label: string;
-  icon: string;
+  icon: (props: SVGProps<SVGSVGElement>) => ReactNode | Promise<ReactNode>;
   color: string;
 };
 

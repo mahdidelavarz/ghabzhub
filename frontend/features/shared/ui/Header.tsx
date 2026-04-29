@@ -2,7 +2,6 @@
 import { useEffect, useState, useRef } from "react";
 
 import { Logo } from "./Logo";
-import { LocalIcon } from "../icons/localIcon";
 import { services } from "../data/data";
 
 export function Header() {
@@ -104,9 +103,7 @@ export function Header() {
               className="hover:scale-110 transition py-2 px- grid place-items-center md:w-24 md:h-24 w-full cursor-pointer rounded-[25px] bg-custom-white shadow-2xl shadow-custom-neutral/20"
               suppressHydrationWarning
             >
-              <LocalIcon
-                name={category.icon as any}
-                size={45}
+              <category.icon
                 className="w-9.5 h-9.5"
                 color={category.color}
               />

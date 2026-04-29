@@ -3,7 +3,7 @@ import { ProfileWidget } from "@/features/auth/ui/ProfileWidget";
 import { NavMobile } from "./NavMobile";
 import { Logo } from "./Logo";
 import { NavDesktop } from "./NavDesktop";
-import { LocalIcon } from "../icons/localIcon";
+import { CardToCardIcon, ShoppingIcon } from "../icons/Icon";
 
 export function NavBar() {
   return (
@@ -21,9 +21,7 @@ export function NavBar() {
                   href="/shopping"
                   className="flex items-center gap-3 transition group duration-300 hover:scale-110 relative text-xs"
                 >
-                  <LocalIcon
-                    name="shopping"
-                    size={30}
+                  <ShoppingIcon
                     className="rounded-lg p-[5px] bg-blue-200/70"
                   />
                   <span>سبد قبض</span>
@@ -32,9 +30,7 @@ export function NavBar() {
                   href="/history"
                   className="flex items-center gap-3 transition group duration-300 hover:scale-110 relative text-xs"
                 >
-                  <LocalIcon
-                    name="cardToCard"
-                    size={30}
+                  <CardToCardIcon
                     className="rounded-lg text-custom-blue bg-custom-blue/20 p-[5px] bg-blue-200/70"
                   />
                   <span>سوابق پرداخت</span>

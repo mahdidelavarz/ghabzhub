@@ -1,7 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 import FormButton from "@/features/shared/ui/FormButton";
-import { LocalIcon } from "@/features/shared/icons/localIcon";
+import { ErrorIcon } from "react-hot-toast";
+
 
 export default function FailedPage() {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function FailedPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <div className="text-center p-8 bg-white rounded-2xl shadow-lg max-w-md w-full">
         <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          {/* <LocalIcon name="error" className="w-10 h-10 text-red-600" /> */}
+          <ErrorIcon className="w-10 h-10 text-red-600" />
         </div>
         <h2 className="text-2xl font-bold text-gray-800 mb-3">
           پرداخت ناموفق بود

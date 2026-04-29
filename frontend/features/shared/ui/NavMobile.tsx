@@ -4,9 +4,22 @@ import { Suspense, useMemo, useState } from "react";
 import { useAuthStore } from "@/features/auth/store/authStore";
 import { useLogout } from "@/features/auth/hooks/useLogout";
 
-import { LocalIcon } from "../icons/localIcon";
 import { services } from "../data/data";
 import { usePathname } from "next/navigation";
+import {
+  AccessTimeIcon,
+  AppIcon,
+  BankIcon,
+  BillIcon,
+  BlogIcon,
+  CloseIcon,
+  HomeIcon,
+  LogoutIcon,
+  ProfileIcon,
+  ShoppingIcon,
+  SupportIcon,
+  WalletIcon,
+} from "../icons/Icon";
 
 function NavMobileComponent() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -16,23 +29,23 @@ function NavMobileComponent() {
 
   const bottomNav = useMemo(
     () => [
-      { label: "خانه", to: "/", icon: "home" as const, color: "#3b82f6" },
+      { label: "خانه", to: "/", icon: HomeIcon, color: "#3b82f6" },
       {
         label: "سوابق",
         to: "/history",
-        icon: "wallet" as const,
+        icon: WalletIcon,
         color: "#10b981",
       },
       {
         label: "سبد قبض",
         to: "/shopping",
-        icon: "shopping" as const,
+        icon: ShoppingIcon,
         color: "#f59e0b",
       },
       {
         label: "منو",
         to: "?o=1",
-        icon: "app" as const,
+        icon: AppIcon,
         isMenu: true,
         color: "#8b5cf6",
       },
@@ -45,38 +58,38 @@ function NavMobileComponent() {
       {
         label: "کیف پول من",
         to: "/wallet",
-        icon: "wallet" as const,
+        icon: WalletIcon,
         color: "#10b981",
       },
       {
         label: "تراکنش های کیف پول",
         to: "/wallet",
-        icon: "bank" as const,
+        icon: BankIcon,
         color: "#ef4444",
       },
       {
         label: "قبض های پرداخت شده",
         to: "/bills",
-        icon: "bill" as const,
+        icon: BillIcon,
         color: "#3b82f6",
       },
       {
         label: "پشتیبانی",
         to: "/support",
-        icon: "support" as const,
+        icon: SupportIcon,
         color: "#8b5cf6",
       },
-      { label: "بلاگ", to: "/blog", icon: "blog" as const, color: "#ec4899" },
+      { label: "بلاگ", to: "/blog", icon: BlogIcon, color: "#ec4899" },
       {
         label: "نسخه سازمانی",
         to: "/org",
-        icon: "accessTime" as const,
+        icon: AccessTimeIcon,
         color: "#06b6d4",
       },
       {
         label: "خروج از حساب کاربری",
         to: "/logout",
-        icon: "logout" as const,
+        icon: LogoutIcon,
         color: "#ef4444",
       },
     ],
@@ -97,12 +110,7 @@ function NavMobileComponent() {
                   onClick={() => setMenuIsOpen(true)}
                   className="flex items-center max-sm:flex-col justify-center gap-x-3 py-2 w-full"
                 >
-                  <LocalIcon
-                    name={item.icon}
-                    size={38}
-                    className="text-neutral-500"
-                    color={item.color}
-                  />
+                  <item.icon className="text-neutral-500" color={item.color} />
                   <span className="text-sm text-neutral-500">{item.label}</span>
                 </button>
               ) : (
@@ -110,9 +118,7 @@ function NavMobileComponent() {
                   href={item.to}
                   className="link flex items-center max-sm:flex-col justify-center gap-x-3 py-2"
                 >
-                  <LocalIcon
-                    name={item.icon}
-                    size={38}
+                  <item.icon
                     className={
                       isActive(item.to) ? "text-blue-600" : "text-neutral-500"
                     }
@@ -141,15 +147,11 @@ function NavMobileComponent() {
         <div className="menu-header">
           <div className="flex justify-end">
             <button type="button" onClick={() => setMenuIsOpen(false)}>
-              <LocalIcon name="close" size={40} className="text-white" />
+              <CloseIcon className="text-white" />
             </button>
           </div>
           <div className="grid place-items-center gap-4">
-            <LocalIcon
-              name="profile"
-              size={120}
-              className="bg-custom-blue/40 rounded-full p-2 shadow-2xl shadow-custom-blue text-white"
-            />
+            <ProfileIcon className="bg-custom-blue/40 rounded-full p-2 shadow-2xl shadow-custom-blue text-white" />
             <div className="flex items-center w-full justify-between px-2 py-1">
               {user ? (
                 <p className="text-custom-white text-xl font-bold">
@@ -160,11 +162,7 @@ function NavMobileComponent() {
                   href="/auth/login"
                   className="flex items-center gap-3 transition group duration-300 hover:scale-110 relative text-white"
                 >
-                  <LocalIcon
-                    name="bill"
-                    size={35}
-                    className="rounded-lg p-[5px] bg-blue-200/70"
-                  />
+                  <BillIcon className="rounded-lg p-[5px] bg-blue-200/70" />
                   <span>ورود به حساب</span>
                 </a>
               )}
@@ -181,9 +179,7 @@ function NavMobileComponent() {
                 className="p-3 transition group hover:scale-95"
               >
                 <div className="flex items-center gap-3">
-                  <LocalIcon
-                    name={service.icon as any}
-                    size={38}
+                  <service.icon
                     color={service.color}
                     className="p-2 rounded-2xl"
                   />
@@ -196,11 +192,7 @@ function NavMobileComponent() {
                       key={item.label}
                       className="p-2 bg-custom-whitesmoke rounded-2xl grid place-items-center text-center"
                     >
-                      <LocalIcon
-                        name={item.icon as any}
-                        size={30}
-                        color={service.color}
-                      />
+                      <item.icon color={service.color} />
                       <p className="text-xs">{item.label}</p>
                     </li>
                   ))}
@@ -218,7 +210,7 @@ function NavMobileComponent() {
               key={item.label}
               className="p-3 transition group hover:scale-95"
             >
-              {item.icon === "logout" ? (
+              {item.icon === LogoutIcon ? (
                 <button
                   type="button"
                   onClick={() => {
@@ -228,22 +220,12 @@ function NavMobileComponent() {
                   className="flex items-center gap-3 w-full text-right"
                   disabled={logoutMutation.isPending}
                 >
-                  <LocalIcon
-                    name={item.icon as any}
-                    size={38}
-                    className="p-2 rounded-2xl"
-                    color={item.color}
-                  />
+                  <item.icon className="p-2 rounded-2xl" color={item.color} />
                   <p className="text-lg">{item.label}</p>
                 </button>
               ) : (
                 <a href={item.to} className="flex items-center gap-3">
-                  <LocalIcon
-                    name={item.icon as any}
-                    size={38}
-                    className="p-2 rounded-2xl"
-                    color={item.color}
-                  />
+                  <item.icon className="p-2 rounded-2xl" color={item.color} />
                   <p className="text-lg">{item.label}</p>
                 </a>
               )}

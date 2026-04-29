@@ -7,7 +7,7 @@ import { useVerifyOtp } from "../hooks/useVerifyOtp";
 import { useResendOtp } from "../hooks/useResendOtp";
 import { verifyOtpSchema, VerifyOtpFormData } from "../schemas/authSchemas";
 import { ColorfulLogo } from "@/features/shared/ui/Logo";
-import { LocalIcon } from "@/features/shared/icons/localIcon";
+import { ArrowDownIcon } from "@/features/shared/icons/Icon";
 
 export default function VerifyOtpContent() {
   const router = useRouter();
@@ -55,7 +55,7 @@ export default function VerifyOtpContent() {
           className="w-7 h-7 bg-white rounded-lg flex justify-center items-center cursor-pointer"
           onClick={() => router.push('/auth/register')}
         >
-          <LocalIcon name="ArrowDownIcon" className="-rotate-90 text-white" />
+          <ArrowDownIcon className="-rotate-90 text-white" />
         </div>{" "}
         <ColorfulLogo />
       </div>

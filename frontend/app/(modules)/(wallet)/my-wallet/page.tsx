@@ -2,7 +2,7 @@
 
 import { useGetPaymentUrl } from "@/features/modules/plateNumber/hooks/useGetPaymentUrl";
 import { usePlateStore } from "@/features/modules/plateNumber/store/plateStore";
-import { LocalIcon } from "@/features/shared/icons/localIcon";
+import { ArrowDownIcon, RefreshIcon } from "@/features/shared/icons/Icon";
 import FormButton from "@/features/shared/ui/FormButton";
 import FormInput from "@/features/shared/ui/FormInput";
 import GrayLine from "@/features/shared/ui/GrayLine";
@@ -139,7 +139,7 @@ function WalletPrice({ className }: { className?: string }) {
             onClick={() => window.location.reload()}
             className="text-slate-500 hover:text-slate-700 transition-colors"
           >
-            <LocalIcon name="Refresh"/>
+            <RefreshIcon/>
           </button>
         </div>
         <div className="w-full flex items-center gap-2 text-slate-500">
@@ -163,7 +163,7 @@ function WalletHeader({ className }: { className?: string }) {
         onClick={() => router.back()}
         className="w-10 h-10 bg-gray-500/30 rounded-xl flex justify-center items-center border-2 border-gray-100 cursor-pointer"
       >
-        <LocalIcon name="ArrowDownIcon" className="-rotate-90"/>
+        <ArrowDownIcon className="-rotate-90"/>
       </button>
       <Logo className="text-blue-600" />
     </div>

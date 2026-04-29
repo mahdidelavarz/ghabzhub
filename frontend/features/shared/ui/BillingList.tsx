@@ -1,12 +1,11 @@
 import { type ServiceCategoryId } from "../types/services";
-import { LocalIcon } from "../icons/localIcon";
 import { services } from "../data/data";
+import { SVGProps } from "react";
 
 type Props = {
   titles: string[];
   lists: ServiceCategoryId[];
   colors: string[];
-  icons: string[];
   cssStyles: string;
 };
 
@@ -14,7 +13,6 @@ export function BillingList({
   titles,
   lists,
   colors,
-  icons,
   cssStyles,
 }: Props) {
   return (
@@ -24,7 +22,7 @@ export function BillingList({
         const items = services[categoryId];
         const color = colors.at(index) ?? category?.color;
         const title = titles.at(index);
-        const icon = icons.at(index) as any;
+        const CategoryIcon = category?.icon; // Get the icon component directly
 
         return (
           <div
@@ -33,7 +31,14 @@ export function BillingList({
             className="bg-custom-white rounded-[33px] p-6 container mx-auto my-5"
           >
             <div className="flex items-center gap-3">
-              {icon && <LocalIcon name={icon} size={25} className={color} color={category?.color} />}
+              {CategoryIcon && (
+                <CategoryIcon 
+                  width={25}
+                  height={25}
+                  className={color}
+                  color={category?.color}
+                />
+              )}
               <span className="font-bold text-custom-neutral text-sm">
                 {title}
               </span>
@@ -51,9 +56,9 @@ export function BillingList({
                         service.disabled ? "opacity-40 pointer-events-none" : ""
                       }`}
                     >
-                      <LocalIcon
-                        name={service.icon as any}
-                        size={55}
+                      <service.icon
+                        width={55}
+                        height={55}
                         className="w-17.5 h-17.5 p-3 bg-custom-whitesmoke rounded-2xl"
                         color={color}
                       />

@@ -112,7 +112,7 @@ function BankSvg(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-function BillSvg(props: SVGProps<SVGSVGElement>) {
+export function BillSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

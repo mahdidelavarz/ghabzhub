@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import FormButton from "@/features/shared/ui/FormButton";
-import { LocalIcon } from "@/features/shared/icons/localIcon";
+import { WarningIcon } from "@/features/shared/icons/Icon";
 
 export default function ErrorPage() {
   const router = useRouter();
@@ -18,7 +18,7 @@ export default function ErrorPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <div className="text-center p-8 bg-white rounded-2xl shadow-lg max-w-md w-full">
         <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          {/* <LocalIcon name="warning" className="w-10 h-10 text-orange-600" /> */}
+          <WarningIcon className="w-10 h-10 text-orange-600" />
         </div>
         <h2 className="text-2xl font-bold text-gray-800 mb-3">
           خطا در اتصال به درگاه پرداخت

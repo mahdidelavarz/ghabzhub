@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 import { BillingList } from './BillingList';
-import { LocalIcon } from '../icons/localIcon';
+import { CloseIcon, ListIcon } from '../icons/Icon';
 
 type NavItem = {
   label: string;
   to: string;
-  icon?: 'bill' | 'car' | 'bank' | 'travel' | 'list';
+  icon?: any;
   hasChildren?: boolean;
 };
 
@@ -15,7 +15,7 @@ const navItems: NavItem[] = [
   {
     label: 'خدمات پرداخت',
     to: '#services',
-    icon: 'list',
+    icon: ListIcon,
     hasChildren: true,
   },
   { label: 'نسخه شرکت ها', to: '/' },
@@ -42,8 +42,7 @@ export function NavDesktop() {
           >
             <a href={item.to}>{item.label}</a>
             {item.icon && (
-              <LocalIcon
-                name={item.icon}
+              <item.icon
                 size={25}
                 className="text-neutral-600 group-hover:text-custom-blue"
               />
@@ -60,7 +59,7 @@ export function NavDesktop() {
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-bold">خدمات پرداخت</p>
                   <button onClick={() => setServiceModal(false)}>
-                    <LocalIcon name="close" size={20} />
+                    <CloseIcon />
                   </button>
                 </div>
                 <BillingList
@@ -73,7 +72,7 @@ export function NavDesktop() {
                   ]}
                   lists={['billAndMobile', 'carAndCycle', 'bank', 'travel']}
                   colors={['#0078d7', '#35c759', '#ffa94d', '#00bfa6']}
-                  icons={['bill', 'car', 'bank', 'travel']}
+                  // icons={['bill', 'car', 'bank', 'travel']}
                 />
               </div>
             </div>
