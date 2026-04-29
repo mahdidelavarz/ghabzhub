@@ -1,111 +1,14 @@
-import { Icon as IconifyIcon } from "@iconify/react";
 import { SVGProps } from "react";
+import { withSuppressHydration } from "./withSuppressHydration";
 
-// Map icon names to Iconify icon identifiers (using Material Design Icons)
-const iconMap: Record<string, string> = {
-  bill: "mdi:receipt-text",
-  car: "mdi:car",
-  bank: "mdi:bank",
-  travel: "mdi:airplane",
-  phone: "mdi:phone",
-  gas: "mdi:gas-station",
-  water: "mdi:water",
-  electricity: "mdi:lightning-bolt",
-  mobile: "mdi:cellphone",
-  shahrdari: "mdi:city-variant",
-  topUpCharge: "mdi:battery-charging",
-  topUpInternetPackage: "mdi:wifi",
-  roaming: "mdi:earth",
-  paperBill: "mdi:file-document",
-  trafficFines: "mdi:traffic-light",
-  motorTrafficFines: "mdi:motorcycle",
-  freeway: "mdi:highway",
-  annualToll: "mdi:road",
-  trafficPlan: "mdi:map",
-  carTax: "mdi:car-multiple",
-  motorTax: "mdi:moped",
-  plateNumber: "mdi:numeric",
-  carDocuments: "mdi:file-document-multiple",
-  negativePoint: "mdi:minus-circle",
-  drivingLicense: "mdi:card-account-details",
-  vehicleAuthenticity: "mdi:shield-check",
-  thirdPartyInquiry: "mdi:shield-search",
-  najiServicePlateNumberHistoryInquiry: "mdi:history",
-  cardToCard: "mdi:credit-card-multiple",
-  passport: "mdi:passport",
-  home: "mdi:home",
-  wallet: "mdi:wallet",
-  shopping: "mdi:cart",
-  app: "mdi:apps",
-  profile: "mdi:account",
-  support: "mdi:help-circle",
-  blog: "mdi:blogger",
-  accessTime: "mdi:clock",
-  close: "mdi:close",
-  logout: "mdi:logout",
-  list: "mdi:format-list-bulleted",
-  account_circle: "mdi:account-circle",
-};
-
-export type IconName = keyof typeof iconMap;
-
-type Props = {
-  name: IconName;
-  size?: number;
-  className?: string;
-  style?: React.CSSProperties;
-  color?: string;
-};
-
-export function Icon({ name, size = 20, className = "", style, color }: Props) {
-  const iconifyIcon = iconMap[name];
-
-  if (!iconifyIcon) {
-    console.warn(`Icon "${name}" not found in iconMap`);
-    return null;
-  }
-
-  return (
-    <IconifyIcon
-      icon={iconifyIcon}
-      width={size}
-      height={size}
-      className={className}
-      style={{
-        color: color || style?.color,
-        ...style,
-      }}
-    />
-  );
-}
-//! example of svg component
-// export function SolarBellBroken(props: SVGProps<SVGSVGElement>) {
-//   return (
-//     <svg
-//       xmlns="http://www.w3.org/2000/svg"
-//       width={24}
-//       height={24}
-//       viewBox="0 0 24 24"
-//       {...props}
-//     >
-//       <path
-//         fill="none"
-//         stroke="currentColor"
-//         strokeLinecap="round"
-//         strokeWidth={1.5}
-//         d="M9.107 2.674A6.5 6.5 0 0 1 12 2c3.727 0 6.75 3.136 6.75 7.005v.705a4.4 4.4 0 0 0 .692 2.375l1.108 1.724c1.011 1.575.239 3.716-1.52 4.214a25.8 25.8 0 0 1-14.06 0c-1.759-.498-2.531-2.639-1.52-4.213l1.108-1.725A4.4 4.4 0 0 0 5.25 9.71v-.705c0-1.074.233-2.092.65-3.002M7.5 19c.655 1.748 2.422 3 4.5 3q.367 0 .72-.05M16.5 19a4.5 4.5 0 0 1-1.302 1.84"
-//       ></path>
-//     </svg>
-//   );
-// }
-
-export function PlateNumberIcon(props: SVGProps<SVGSVGElement>) {
+function PlateNumberSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="64"
       height="64"
       viewBox="0 0 24 24"
+      fill="currentColor"
       {...props}
     >
       <path d="M10 3.86h9.1a2.95 2.95 0 0 1 2.95 2.94v1.33h-8.8A6.3 6.3 0 0 0 10 3.85m-3.05.4a5 5 0 1 0 0 10 5 5 0 0 0 0-10m2.7 3.97-2.86 2.86q-.17.16-.41.17c-.24 0-.3-.06-.41-.17L4.43 9.54c-.22-.22-.22-.6 0-.81s.59-.22.8 0l1.14 1.13L8.83 7.4a.6.6 0 0 1 .8 0c.23.22.23.59 0 .8z"></path>
@@ -115,7 +18,7 @@ export function PlateNumberIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-export function AccessTimeIcon(props: SVGProps<SVGSVGElement>) {
+function AccessTimeSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +35,7 @@ export function AccessTimeIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-export function AnnualTollIcon(props: SVGProps<SVGSVGElement>) {
+function AnnualTollSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -149,7 +52,7 @@ export function AnnualTollIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-export function AppIcon(props: SVGProps<SVGSVGElement>) {
+function AppSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +79,7 @@ export function AppIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-export function ArrowDownIcon(props: SVGProps<SVGSVGElement>) {
+function ArrowDownSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -192,13 +95,14 @@ export function ArrowDownIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function BankIcon(props: SVGProps<SVGSVGElement>) {
+function BankSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="32"
       height="32"
       viewBox="0 0 24 24"
+      suppressHydrationWarning
       {...props}
     >
       <path
@@ -208,13 +112,14 @@ export function BankIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function BillIcon(props: SVGProps<SVGSVGElement>) {
+function BillSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
       viewBox="0 0 24 24"
+      suppressHydrationWarning
       {...props}
     >
       <path
@@ -228,7 +133,8 @@ export function BillIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function BlogIcon(props: SVGProps<SVGSVGElement>) {
+
+function BlogSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -248,13 +154,14 @@ export function BlogIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function CarIcon(props: SVGProps<SVGSVGElement>) {
+function CarSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="40"
       height="40"
       viewBox="0 0 24 24"
+      suppressHydrationWarning
       {...props}
     >
       <path
@@ -264,7 +171,7 @@ export function CarIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function CarDocumentsIcon(props: SVGProps<SVGSVGElement>) {
+function CarDocumentsSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -288,7 +195,7 @@ export function CarDocumentsIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function CardToCardIcon(props: SVGProps<SVGSVGElement>) {
+function CardToCardSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -308,7 +215,7 @@ export function CardToCardIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function CarTaxIcon(props: SVGProps<SVGSVGElement>) {
+function CarTaxSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -332,7 +239,7 @@ export function CarTaxIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function CheckIcon(props: SVGProps<SVGSVGElement>) {
+function CheckSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -348,7 +255,7 @@ export function CheckIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function CloseIcon(props: SVGProps<SVGSVGElement>) {
+function CloseSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -364,7 +271,7 @@ export function CloseIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function DrivingLicenseIcon(props: SVGProps<SVGSVGElement>) {
+function DrivingLicenseSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -384,7 +291,7 @@ export function DrivingLicenseIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function ElectricityIcon(props: SVGProps<SVGSVGElement>) {
+function ElectricitySvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -400,7 +307,7 @@ export function ElectricityIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function ErrorIcon(props: SVGProps<SVGSVGElement>) {
+function ErrorSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -418,7 +325,7 @@ export function ErrorIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function FlagIranIcon(props: SVGProps<SVGSVGElement>) {
+function FlagIranSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -442,7 +349,7 @@ export function FlagIranIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function FreewayIcon(props: SVGProps<SVGSVGElement>) {
+function FreewaySvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -466,7 +373,7 @@ export function FreewayIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function GasIcon(props: SVGProps<SVGSVGElement>) {
+function GasSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -482,7 +389,7 @@ export function GasIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function HomeIcon(props: SVGProps<SVGSVGElement>) {
+function HomeSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -501,7 +408,7 @@ export function HomeIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function InfoIcon(props: SVGProps<SVGSVGElement>) {
+function InfoSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -523,7 +430,7 @@ export function InfoIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function InstagramIcon(props: SVGProps<SVGSVGElement>) {
+function InstagramSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -543,7 +450,7 @@ export function InstagramIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function ListIcon(props: SVGProps<SVGSVGElement>) {
+function ListSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -559,7 +466,7 @@ export function ListIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function LogoutIcon(props: SVGProps<SVGSVGElement>) {
+function LogoutSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -579,7 +486,7 @@ export function LogoutIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function MinusIcon(props: SVGProps<SVGSVGElement>) {
+function MinusSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -592,7 +499,7 @@ export function MinusIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function MobileIcon(props: SVGProps<SVGSVGElement>) {
+function MobileSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -609,7 +516,7 @@ export function MobileIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function MotorTaxIcon(props: SVGProps<SVGSVGElement>) {
+function MotorTaxSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -633,7 +540,7 @@ export function MotorTaxIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function MotorTrafficFinesIcon(props: SVGProps<SVGSVGElement>) {
+function MotorTrafficFinesSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -653,7 +560,7 @@ export function MotorTrafficFinesIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function NajiServicePlateNumberHistoryInquiryIcon(
+function NajiServicePlateNumberHistoryInquirySvg(
   props: SVGProps<SVGSVGElement>,
 ) {
   return (
@@ -679,7 +586,7 @@ export function NajiServicePlateNumberHistoryInquiryIcon(
     </svg>
   );
 }
-export function NegativePointIcon(props: SVGProps<SVGSVGElement>) {
+function NegativePointSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -699,7 +606,7 @@ export function NegativePointIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function PaperBillIcon(props: SVGProps<SVGSVGElement>) {
+function PaperBillSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -715,7 +622,7 @@ export function PaperBillIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function PassportIcon(props: SVGProps<SVGSVGElement>) {
+function PassportSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -742,7 +649,7 @@ export function PassportIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function PhoneIcon(props: SVGProps<SVGSVGElement>) {
+function PhoneSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -762,7 +669,7 @@ export function PhoneIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function PlusIcon(props: SVGProps<SVGSVGElement>) {
+function PlusSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -778,7 +685,7 @@ export function PlusIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function ProfileIcon(props: SVGProps<SVGSVGElement>) {
+function ProfileSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -798,7 +705,7 @@ export function ProfileIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function RefreshIcon(props: SVGProps<SVGSVGElement>) {
+function RefreshSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -814,7 +721,7 @@ export function RefreshIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function RoamingIcon(props: SVGProps<SVGSVGElement>) {
+function RoamingSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -841,7 +748,7 @@ export function RoamingIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function ShahrdariIcon(props: SVGProps<SVGSVGElement>) {
+function ShahrdariSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -861,7 +768,7 @@ export function ShahrdariIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function ShoppingIcon(props: SVGProps<SVGSVGElement>) {
+function ShoppingSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -874,11 +781,20 @@ export function ShoppingIcon(props: SVGProps<SVGSVGElement>) {
         fill="currentColor"
         d="M21.22 9.3h-1.97l-.57-3.7a3.9 3.9 0 0 0-3.88-3.33H9.18A3.9 3.9 0 0 0 5.3 5.6l-.57 3.7H2.78a.76.76 0 0 0 0 1.51h.4l.48 7.26a3.94 3.94 0 0 0 3.92 3.66h8.85a3.94 3.94 0 0 0 3.91-3.66l.49-7.26h.4a.76.76 0 0 0 0-1.51Zm-14.96 0 .54-3.47a2.4 2.4 0 0 1 2.38-2.04h5.62a2.4 2.4 0 0 1 2.38 2.04l.54 3.47zm12.53 8.73a2.4 2.4 0 0 1-2.39 2.19H7.55a2.4 2.4 0 0 1-2.4-2.24l-.46-7.16h14.58l-.48 7.16z"
       />
-      <rect width="1.5" height="7.71" x="11.23" y="13.3" rx=".75" ry=".75" transform="rotate(-90 11.98 17.16)" fill="currentColor" />
+      <rect
+        width="1.5"
+        height="7.71"
+        x="11.23"
+        y="13.3"
+        rx=".75"
+        ry=".75"
+        transform="rotate(-90 11.98 17.16)"
+        fill="currentColor"
+      />
     </svg>
   );
 }
-export function SuccessIcon(props: SVGProps<SVGSVGElement>) {
+function SuccessSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -894,7 +810,7 @@ export function SuccessIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function SupportIcon(props: SVGProps<SVGSVGElement>) {
+function SupportSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -910,7 +826,7 @@ export function SupportIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function TechnicalInspectionIcon(props: SVGProps<SVGSVGElement>) {
+function TechnicalInspectionSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -930,7 +846,7 @@ export function TechnicalInspectionIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function TravelIcon(props: SVGProps<SVGSVGElement>) {
+function TravelSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -946,7 +862,7 @@ export function TravelIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function ThirdPartyInquiryIcon(props: SVGProps<SVGSVGElement>) {
+function ThirdPartyInquirySvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -966,7 +882,7 @@ export function ThirdPartyInquiryIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function TopUpChargeIcon(props: SVGProps<SVGSVGElement>) {
+function TopUpChargeSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -993,7 +909,7 @@ export function TopUpChargeIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function TopUpInternetPackageIcon(props: SVGProps<SVGSVGElement>) {
+function TopUpInternetPackageSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1010,7 +926,7 @@ export function TopUpInternetPackageIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function TrafficFinesIcon(props: SVGProps<SVGSVGElement>) {
+function TrafficFinesSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1026,7 +942,7 @@ export function TrafficFinesIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function TrafficPlanIcon(props: SVGProps<SVGSVGElement>) {
+function TrafficPlanSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1050,7 +966,7 @@ export function TrafficPlanIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function TrashIcon(props: SVGProps<SVGSVGElement>) {
+function TrashSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1066,7 +982,7 @@ export function TrashIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function UserProfileIcon(props: SVGProps<SVGSVGElement>) {
+function UserProfileSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1077,12 +993,15 @@ export function UserProfileIcon(props: SVGProps<SVGSVGElement>) {
     >
       <g fill="none">
         <path fill="currentColor" d="M0 7a7 7 0 1 0 14 0A7 7 0 1 0 0 7" />
-        <path fill="currentColor" d="M4.5 5a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0-5 0m6.743 5.5A5.49 5.49 0 0 0 7 8.5a5.49 5.49 0 0 0-4.243 2A5.49 5.49 0 0 0 7 12.5a5.49 5.49 0 0 0 4.243-2" />
+        <path
+          fill="currentColor"
+          d="M4.5 5a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0-5 0m6.743 5.5A5.49 5.49 0 0 0 7 8.5a5.49 5.49 0 0 0-4.243 2A5.49 5.49 0 0 0 7 12.5a5.49 5.49 0 0 0 4.243-2"
+        />
       </g>
     </svg>
   );
 }
-export function VehicleAuthenticityIcon(props: SVGProps<SVGSVGElement>) {
+function VehicleAuthenticitySvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1102,7 +1021,7 @@ export function VehicleAuthenticityIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function WalletIcon(props: SVGProps<SVGSVGElement>) {
+function WalletSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1118,7 +1037,7 @@ export function WalletIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function WarningIcon(props: SVGProps<SVGSVGElement>) {
+function WarningSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1138,7 +1057,7 @@ export function WarningIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-export function WaterIcon(props: SVGProps<SVGSVGElement>) {
+function WaterSvg(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1154,3 +1073,69 @@ export function WaterIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export const AccessTimeIcon = withSuppressHydration(AccessTimeSvg);
+export const AnnualTollIcon = withSuppressHydration(AnnualTollSvg);
+export const AppIcon = withSuppressHydration(AppSvg);
+export const ArrowDownIcon = withSuppressHydration(ArrowDownSvg);
+export const BankIcon = withSuppressHydration(BankSvg);
+export const BillIcon = withSuppressHydration(BillSvg);
+export const BlogIcon = withSuppressHydration(BlogSvg);
+export const CarIcon = withSuppressHydration(CarSvg);
+export const CarDocumentsIcon = withSuppressHydration(CarDocumentsSvg);
+export const CardToCardIcon = withSuppressHydration(CardToCardSvg);
+export const CarTaxIcon = withSuppressHydration(CarTaxSvg);
+export const CheckIcon = withSuppressHydration(CheckSvg);
+export const CloseIcon = withSuppressHydration(CloseSvg);
+export const DrivingLicenseIcon = withSuppressHydration(DrivingLicenseSvg);
+export const ElectricityIcon = withSuppressHydration(ElectricitySvg);
+export const ErrorIcon = withSuppressHydration(ErrorSvg);
+export const FlagIranIcon = withSuppressHydration(FlagIranSvg);
+export const FreewayIcon = withSuppressHydration(FreewaySvg);
+export const GasIcon = withSuppressHydration(GasSvg);
+export const HomeIcon = withSuppressHydration(HomeSvg);
+export const InfoIcon = withSuppressHydration(InfoSvg);
+export const InstagramIcon = withSuppressHydration(InstagramSvg);
+export const ListIcon = withSuppressHydration(ListSvg);
+export const LogoutIcon = withSuppressHydration(LogoutSvg);
+export const MinusIcon = withSuppressHydration(MinusSvg);
+export const MobileIcon = withSuppressHydration(MobileSvg);
+export const MotorTaxIcon = withSuppressHydration(MotorTaxSvg);
+export const MotorTrafficFinesIcon =
+  withSuppressHydration(MotorTrafficFinesSvg);
+export const NajiServicePlateNumberHistoryInquiryIcon = withSuppressHydration(
+  NajiServicePlateNumberHistoryInquirySvg,
+);
+export const NegativePointIcon = withSuppressHydration(NegativePointSvg);
+export const PaperBillIcon = withSuppressHydration(PaperBillSvg);
+export const PassportIcon = withSuppressHydration(PassportSvg);
+export const PhoneIcon = withSuppressHydration(PhoneSvg);
+export const PlateNumberIcon = withSuppressHydration(PlateNumberSvg);
+export const PlusIcon = withSuppressHydration(PlusSvg);
+export const ProfileIcon = withSuppressHydration(ProfileSvg);
+export const RefreshIcon = withSuppressHydration(RefreshSvg);
+export const RoamingIcon = withSuppressHydration(RoamingSvg);
+export const ShahrdariIcon = withSuppressHydration(ShahrdariSvg);
+export const ShoppingIcon = withSuppressHydration(ShoppingSvg);
+export const SuccessIcon = withSuppressHydration(SuccessSvg);
+export const SupportIcon = withSuppressHydration(SupportSvg);
+export const TechnicalInspectionIcon = withSuppressHydration(
+  TechnicalInspectionSvg,
+);
+export const ThirdPartyInquiryIcon =
+  withSuppressHydration(ThirdPartyInquirySvg);
+export const TopUpChargeIcon = withSuppressHydration(TopUpChargeSvg);
+export const TopUpInternetPackageIcon = withSuppressHydration(
+  TopUpInternetPackageSvg,
+);
+export const TrafficFinesIcon = withSuppressHydration(TrafficFinesSvg);
+export const TrafficPlanIcon = withSuppressHydration(TrafficPlanSvg);
+export const TravelIcon = withSuppressHydration(TravelSvg);
+export const TrashIcon = withSuppressHydration(TrashSvg);
+export const UserProfileIcon = withSuppressHydration(UserProfileSvg);
+export const VehicleAuthenticityIcon = withSuppressHydration(
+  VehicleAuthenticitySvg,
+);
+export const WalletIcon = withSuppressHydration(WalletSvg);
+export const WarningIcon = withSuppressHydration(WarningSvg);
+export const WaterIcon = withSuppressHydration(WaterSvg);

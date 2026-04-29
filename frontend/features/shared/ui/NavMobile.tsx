@@ -1,40 +1,90 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { useAuthStore } from "@/features/auth/store/authStore";
 import { useLogout } from "@/features/auth/hooks/useLogout";
 
 import { LocalIcon } from "../icons/localIcon";
 import { services } from "../data/data";
+import { usePathname } from "next/navigation";
 
-export function NavMobile() {
+function NavMobileComponent() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const user = useAuthStore((s) => s.user);
   const logoutMutation = useLogout();
+  const pathname = usePathname();
 
   const bottomNav = useMemo(
     () => [
-      { label: "خانه", to: "/", icon: "home" as const },
-      { label: "سوابق", to: "/history", icon: "wallet" as const },
-      { label: "سبد قبض", to: "/shopping", icon: "shopping" as const },
-      { label: "منو", to: "?o=1", icon: "app" as const, isMenu: true },
+      { label: "خانه", to: "/", icon: "home" as const, color: "#3b82f6" },
+      {
+        label: "سوابق",
+        to: "/history",
+        icon: "wallet" as const,
+        color: "#10b981",
+      },
+      {
+        label: "سبد قبض",
+        to: "/shopping",
+        icon: "shopping" as const,
+        color: "#f59e0b",
+      },
+      {
+        label: "منو",
+        to: "?o=1",
+        icon: "app" as const,
+        isMenu: true,
+        color: "#8b5cf6",
+      },
     ],
     [],
   );
 
   const moreLinks = useMemo(
     () => [
-      { label: "کیف پول من", to: "/wallet", icon: "wallet" as const },
-      { label: "تراکنش های کیف پول", to: "/wallet", icon: "bank" as const },
-      { label: "قبض های پرداخت شده", to: "/bills", icon: "bill" as const },
-      { label: "پشتیبانی", to: "/support", icon: "support" as const },
-      { label: "بلاگ", to: "/blog", icon: "blog" as const },
-      { label: "نسخه سازمانی", to: "/org", icon: "accessTime" as const },
-      { label: "خروج از حساب کاربری", to: "/logout", icon: "logout" as const },
+      {
+        label: "کیف پول من",
+        to: "/wallet",
+        icon: "wallet" as const,
+        color: "#10b981",
+      },
+      {
+        label: "تراکنش های کیف پول",
+        to: "/wallet",
+        icon: "bank" as const,
+        color: "#ef4444",
+      },
+      {
+        label: "قبض های پرداخت شده",
+        to: "/bills",
+        icon: "bill" as const,
+        color: "#3b82f6",
+      },
+      {
+        label: "پشتیبانی",
+        to: "/support",
+        icon: "support" as const,
+        color: "#8b5cf6",
+      },
+      { label: "بلاگ", to: "/blog", icon: "blog" as const, color: "#ec4899" },
+      {
+        label: "نسخه سازمانی",
+        to: "/org",
+        icon: "accessTime" as const,
+        color: "#06b6d4",
+      },
+      {
+        label: "خروج از حساب کاربری",
+        to: "/logout",
+        icon: "logout" as const,
+        color: "#ef4444",
+      },
     ],
     [],
   );
-
+  const isActive = (path: string) => {
+    return pathname === path;
+  };
   return (
     <>
       <nav className="md:hidden block z-30 fixed bottom-0 bg-custom-white rounded-t-3xl shadow-2xl shadow-black/70 border border-slate-100 left-1/2 -translate-x-1/2 w-full">
@@ -50,9 +100,10 @@ export function NavMobile() {
                   <LocalIcon
                     name={item.icon}
                     size={38}
-                    className="text-neutral-700"
+                    className="text-neutral-500"
+                    color={item.color}
                   />
-                  <span className="text-sm">{item.label}</span>
+                  <span className="text-sm text-neutral-500">{item.label}</span>
                 </button>
               ) : (
                 <a
@@ -62,9 +113,19 @@ export function NavMobile() {
                   <LocalIcon
                     name={item.icon}
                     size={38}
-                    className="text-neutral-700"
+                    className={
+                      isActive(item.to) ? "text-blue-600" : "text-neutral-500"
+                    }
+                    color={isActive(item.to) ? item.color : undefined}
                   />
-                  <span className="text-sm">{item.label}</span>
+                  <span
+                    className="text-sm"
+                    style={{
+                      color: isActive(item.to) ? item.color : "#737373",
+                    }}
+                  >
+                    {item.label}
+                  </span>
                 </a>
               )}
             </li>
@@ -101,7 +162,6 @@ export function NavMobile() {
                 >
                   <LocalIcon
                     name="bill"
-                    //"acountCircle"
                     size={35}
                     className="rounded-lg p-[5px] bg-blue-200/70"
                   />
@@ -124,9 +184,8 @@ export function NavMobile() {
                   <LocalIcon
                     name={service.icon as any}
                     size={38}
-                    // color="#f8fafc"
+                    color={service.color}
                     className="p-2 rounded-2xl"
-                    // style={{ backgroundColor: service.color }}
                   />
                   <p className="text-lg">{service.label}</p>
                 </div>
@@ -140,7 +199,7 @@ export function NavMobile() {
                       <LocalIcon
                         name={item.icon as any}
                         size={30}
-                        // color={service.color}
+                        color={service.color}
                       />
                       <p className="text-xs">{item.label}</p>
                     </li>
@@ -173,6 +232,7 @@ export function NavMobile() {
                     name={item.icon as any}
                     size={38}
                     className="p-2 rounded-2xl"
+                    color={item.color}
                   />
                   <p className="text-lg">{item.label}</p>
                 </button>
@@ -182,6 +242,7 @@ export function NavMobile() {
                     name={item.icon as any}
                     size={38}
                     className="p-2 rounded-2xl"
+                    color={item.color}
                   />
                   <p className="text-lg">{item.label}</p>
                 </a>
@@ -191,5 +252,19 @@ export function NavMobile() {
         </ul>
       </div>
     </>
+  );
+}
+
+export function NavMobile() {
+  return (
+    <Suspense
+      fallback={
+        <div className="md:hidden block z-30 fixed bottom-0 bg-custom-white rounded-t-3xl shadow-2xl shadow-black/70 border border-slate-100 left-1/2 -translate-x-1/2 w-full h-16">
+          {/* Skeleton loader matching the nav height */}
+        </div>
+      }
+    >
+      <NavMobileComponent />
+    </Suspense>
   );
 }

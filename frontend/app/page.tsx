@@ -1,3 +1,4 @@
+"use client"
 import { BillingList } from "@/features/shared/ui/BillingList";
 import { Header } from "@/features/shared/ui/Header";
 import { NavBar } from "@/features/shared/ui/NavBar";

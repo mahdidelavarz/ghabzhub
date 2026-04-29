@@ -8,9 +8,12 @@ import { services } from "../data/data";
 export function Header() {
   const [scrollOnTarget, setScrollOnTarget] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const scrollTimeout = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
+    setMounted(true);
+    
     let lastScrollY = window.scrollY;
     let ticking = false;
 
@@ -20,9 +23,7 @@ export function Header() {
           const currentScrollY = window.scrollY;
           const isMobile = window.innerWidth < 768;
 
-          // Add hysteresis to prevent jitter
           if (isMobile) {
-            // Don't update while actively scrolling down near the threshold
             if (Math.abs(currentScrollY - lastScrollY) > 5) {
               setIsScrolling(true);
               if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
@@ -31,9 +32,8 @@ export function Header() {
               }, 150);
             }
 
-            // Only update when not near the threshold during active scrolling
-            if (!isScrolling || Math.abs(currentScrollY - 150) > 30) {
-              setScrollOnTarget(currentScrollY > 150);
+            if (!isScrolling || Math.abs(currentScrollY - 80) > 30) {
+              setScrollOnTarget(currentScrollY > 80);
             }
           } else {
             setScrollOnTarget(currentScrollY > 150);
@@ -54,10 +54,23 @@ export function Header() {
   }, [isScrolling]);
 
   const offsetClass = scrollOnTarget
-    ? window.innerWidth < 768
-      ? "-translate-y-35" // Less movement on mobile to prevent jitter
+    ? typeof window !== 'undefined' && window.innerWidth < 768
+      ? "-translate-y-35"
       : "-translate-y-30 md:-translate-y-15"
     : "";
+
+  // Don't render on server to prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <div className="container mx-auto z-10 mb-18 md:mb-0 md:my-18 sticky top-0 left-0">
+        <div className="px-6 pt-7 header rounded-b-[50px] text-center">
+          <div className="md:hidden inline-block mb-3 text-4xl text-custom-white">
+            <Logo />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -89,13 +102,18 @@ export function Header() {
               key={category.id}
               href={`#${category.id}`}
               className="hover:scale-110 transition py-2 px- grid place-items-center md:w-24 md:h-24 w-full cursor-pointer rounded-[25px] bg-custom-white shadow-2xl shadow-custom-neutral/20"
+              suppressHydrationWarning
             >
               <LocalIcon
                 name={category.icon as any}
                 size={45}
                 className="w-9.5 h-9.5"
+                color={category.color}
               />
-              <span className={`text-[10px] font-semibold text-nowrap ${scrollOnTarget && "hidden"}`}>
+              <span
+                className={`text-[10px] font-semibold text-nowrap ${scrollOnTarget && "hidden"}`}
+                suppressHydrationWarning
+              >
                 {category.label}
               </span>
             </a>

@@ -1,10 +1,9 @@
-
+"use client"
 import { ProfileWidget } from "@/features/auth/ui/ProfileWidget";
 import { NavMobile } from "./NavMobile";
 import { Logo } from "./Logo";
 import { NavDesktop } from "./NavDesktop";
 import { LocalIcon } from "../icons/localIcon";
-
 
 export function NavBar() {
   return (

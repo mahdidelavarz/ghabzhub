@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from 'react';
-import { Icon } from '../icons/Icon';
 import { BillingList } from './BillingList';
+import { LocalIcon } from '../icons/localIcon';
 
 type NavItem = {
   label: string;
@@ -42,7 +42,7 @@ export function NavDesktop() {
           >
             <a href={item.to}>{item.label}</a>
             {item.icon && (
-              <Icon
+              <LocalIcon
                 name={item.icon}
                 size={25}
                 className="text-neutral-600 group-hover:text-custom-blue"
@@ -60,7 +60,7 @@ export function NavDesktop() {
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-bold">خدمات پرداخت</p>
                   <button onClick={() => setServiceModal(false)}>
-                    <Icon name="close" size={20} />
+                    <LocalIcon name="close" size={20} />
                   </button>
                 </div>
                 <BillingList

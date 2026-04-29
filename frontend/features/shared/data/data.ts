@@ -15,7 +15,7 @@ export const services: Services = {
       color: "#35c759",
     },
     { id: "bank", label: "خدمات بانکی", icon: "bank", color: "#ffa94d" },
-    { id: "travel", label: "خدمات سفر", icon: "bill", color: "#00bfa6" },
+    { id: "travel", label: "خدمات سفر", icon: "travel", color: "#00bfa6" },
   ],
   billAndMobile: [
     {

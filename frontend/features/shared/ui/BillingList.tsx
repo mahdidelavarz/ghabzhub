@@ -33,7 +33,7 @@ export function BillingList({
             className="bg-custom-white rounded-[33px] p-6 container mx-auto my-5"
           >
             <div className="flex items-center gap-3">
-              {icon && <LocalIcon name={icon} size={25} className={color} />}
+              {icon && <LocalIcon name={icon} size={25} className={color} color={category?.color} />}
               <span className="font-bold text-custom-neutral text-sm">
                 {title}
               </span>
