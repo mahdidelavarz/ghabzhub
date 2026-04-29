@@ -7,6 +7,7 @@ import { Icon } from "@iconify/react";
 import { useLogout } from "../hooks/useLogout";
 import { useProfileQuery } from "../hooks/useProfileQuery";
 import { useAuthStore } from "../store/authStore";
+import { ProfileIcon } from "@/features/shared/icons/Icon";
 
 export function ProfileWidget() {
   useProfileQuery();
@@ -45,11 +46,8 @@ export function ProfileWidget() {
         href="/auth/login"
         className="flex items-center gap-3 transition group duration-300 hover:scale-110 relative text-xs"
       >
-        <Icon
-          icon="mdi:account-circle"
-          width={30}
-          height={30}
-          className="rounded-lg p-[5px] bg-blue-200/70"
+        <ProfileIcon
+          className="text-custom-blue rounded-lg p-1.25 bg-blue-200/70 w-10 h-10"
         />
         <span>ورود به حساب</span>
       </a>
@@ -62,11 +60,8 @@ export function ProfileWidget() {
         onClick={toggleMenu}
         className="flex items-center gap-3 cursor-pointer transition group duration-300 hover:scale-110 text-xs"
       >
-        <Icon
-          icon="mdi:account-circle"
-          width={30}
-          height={30}
-          className="rounded-lg p-[5px] bg-green-200/70"
+        <ProfileIcon
+          className="text-custom-blue rounded-lg p-1.25 bg-blue-200/70 w-10 h-10"
         />
         <span>{user.name || user.mobile_number}</span>
       </div>

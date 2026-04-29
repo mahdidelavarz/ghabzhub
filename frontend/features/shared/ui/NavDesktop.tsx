@@ -40,11 +40,10 @@ export function NavDesktop() {
               }
             }}
           >
-            <a href={item.to}>{item.label}</a>
+            <a href={item.to} className='text-neutral-600'>{item.label}</a>
             {item.icon && (
               <item.icon
-                size={25}
-                className="text-neutral-600 group-hover:text-custom-blue"
+                className="text-blue-800 group-hover:text-custom-blue w-8 h-8"
               />
             )}
           </li>
@@ -72,7 +71,6 @@ export function NavDesktop() {
                   ]}
                   lists={['billAndMobile', 'carAndCycle', 'bank', 'travel']}
                   colors={['#0078d7', '#35c759', '#ffa94d', '#00bfa6']}
-                  // icons={['bill', 'car', 'bank', 'travel']}
                 />
               </div>
             </div>

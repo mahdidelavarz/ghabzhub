@@ -1,7 +1,7 @@
 "use client"
 import { ProfileWidget } from "@/features/auth/ui/ProfileWidget";
 import { NavMobile } from "./NavMobile";
-import { Logo } from "./Logo";
+import { ColorfulLogo, Logo } from "./Logo";
 import { NavDesktop } from "./NavDesktop";
 import { CardToCardIcon, ShoppingIcon } from "../icons/Icon";
 
@@ -13,7 +13,7 @@ export function NavBar() {
         <div className="container w-11/12 mx-auto ">
           <div className="py-5">
             <div className="flex justify-between items-center">
-              <Logo className="text-lg" />
+              <ColorfulLogo colors="from-blue-400 via-cyan-400 to-blue-400 text-2xl" />
               <NavDesktop />
               <div className="flex items-center gap-5 ">
                 <ProfileWidget />
@@ -22,7 +22,7 @@ export function NavBar() {
                   className="flex items-center gap-3 transition group duration-300 hover:scale-110 relative text-xs"
                 >
                   <ShoppingIcon
-                    className="rounded-lg p-[5px] bg-blue-200/70"
+                    className="text-custom-blue rounded-lg p-1.25 bg-blue-200/70  w-10 h-10"
                   />
                   <span>سبد قبض</span>
                 </a>
@@ -31,7 +31,7 @@ export function NavBar() {
                   className="flex items-center gap-3 transition group duration-300 hover:scale-110 relative text-xs"
                 >
                   <CardToCardIcon
-                    className="rounded-lg text-custom-blue bg-custom-blue/20 p-[5px] bg-blue-200/70"
+                    className="rounded-lg text-custom-blue bg-custom-blue/20 p-1.25 bg-blue-200/70 w-10 h-10"
                   />
                   <span>سوابق پرداخت</span>
                 </a>

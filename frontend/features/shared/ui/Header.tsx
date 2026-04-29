@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 
-import { Logo } from "./Logo";
+import { ColorfulLogo, Logo } from "./Logo";
 import { services } from "../data/data";
 
 export function Header() {
@@ -55,7 +55,7 @@ export function Header() {
   const offsetClass = scrollOnTarget
     ? typeof window !== 'undefined' && window.innerWidth < 768
       ? "-translate-y-35"
-      : "-translate-y-30 md:-translate-y-15"
+      : "-translate-y-30 md:-translate-y-10"
     : "";
 
   // Don't render on server to prevent hydration mismatch
@@ -73,7 +73,7 @@ export function Header() {
 
   return (
     <div
-      className={`container mx-auto z-10 mb-18 md:mb-0 md:my-18 sticky top-0 left-0 transition duration-300 ${offsetClass}`}
+      className={`container mx-auto z-10 mb-18 md:mb-0 md:my-25 sticky top-0 left-0 transition duration-300 ${offsetClass}`}
     >
       <div className="px-6 pt-7 header rounded-b-[50px] text-center">
         <div className="md:hidden inline-block mb-3 text-4xl text-custom-white">
@@ -83,7 +83,7 @@ export function Header() {
           className={`text-custom-white md:text-2xl font-bold ${scrollOnTarget ? "opacity-0 invisible" : ""}`}
         >
           <span className="hidden md:inline-block mb-3 text-4xl text-custom-white">
-            <Logo className="ml-10" />
+            <ColorfulLogo colors="from-white via-cyan-200 to-blue-200 text-4xl ml-10" />
           </span>
           سامانه پرداخت قبض <span className="text-2xl">هوشمند</span>
         </h1>
@@ -104,7 +104,7 @@ export function Header() {
               suppressHydrationWarning
             >
               <category.icon
-                className="w-9.5 h-9.5"
+                className="w-11 h-11"
                 color={category.color}
               />
               <span

@@ -110,7 +110,7 @@ function NavMobileComponent() {
                   onClick={() => setMenuIsOpen(true)}
                   className="flex items-center max-sm:flex-col justify-center gap-x-3 py-2 w-full"
                 >
-                  <item.icon className="text-neutral-500" color={item.color} />
+                  <item.icon className="text-neutral-500 w-9 h-9" color={item.color} />
                   <span className="text-sm text-neutral-500">{item.label}</span>
                 </button>
               ) : (
@@ -120,7 +120,7 @@ function NavMobileComponent() {
                 >
                   <item.icon
                     className={
-                      isActive(item.to) ? "text-blue-600" : "text-neutral-500"
+                      isActive(item.to) ? "text-blue-700 w-9 h-9" : "text-neutral-500 w-9 h-9"
                     }
                     color={isActive(item.to) ? item.color : undefined}
                   />
@@ -141,17 +141,17 @@ function NavMobileComponent() {
 
       <div
         className={`fixed lg:hidden pb-28 z-20 top-0 left-0 w-full opacity-0 transition h-screen overflow-y-auto bg-custom-white translate-x-full ${
-          menuIsOpen ? "opacity-100 !translate-x-0" : ""
+          menuIsOpen ? "opacity-100 translate-x-0!" : ""
         }`}
       >
         <div className="menu-header">
           <div className="flex justify-end">
             <button type="button" onClick={() => setMenuIsOpen(false)}>
-              <CloseIcon className="text-white" />
+              <CloseIcon className="text-white bg-white/30 p-1 rounded-lg w-10 h-10" />
             </button>
           </div>
           <div className="grid place-items-center gap-4">
-            <ProfileIcon className="bg-custom-blue/40 rounded-full p-2 shadow-2xl shadow-custom-blue text-white" />
+            <ProfileIcon className="bg-custom-blue/40 rounded-full p-2 shadow-2xl shadow-custom-blue text-white w-15 h-15" />
             <div className="flex items-center w-full justify-between px-2 py-1">
               {user ? (
                 <p className="text-custom-white text-xl font-bold">
@@ -162,7 +162,7 @@ function NavMobileComponent() {
                   href="/auth/login"
                   className="flex items-center gap-3 transition group duration-300 hover:scale-110 relative text-white"
                 >
-                  <BillIcon className="rounded-lg p-[5px] bg-blue-200/70" />
+                  <BillIcon className="rounded-lg p-1.25 bg-blue-200/70 w-8 h-8" />
                   <span>ورود به حساب</span>
                 </a>
               )}
@@ -181,18 +181,18 @@ function NavMobileComponent() {
                 <div className="flex items-center gap-3">
                   <service.icon
                     color={service.color}
-                    className="p-2 rounded-2xl"
+                    className="p-1.5 bg-stone-200/60 rounded-2xl w-10 h-10"
                   />
                   <p className="text-lg">{service.label}</p>
                 </div>
 
-                <ul className="group-hover:grid grid-cols-6 gap-2 hidden mt-4">
+                <ul className="group-hover:grid grid-cols-3 md:grid-cols-4 gap-2 hidden mt-4">
                   {items.map((item) => (
                     <li
                       key={item.label}
-                      className="p-2 bg-custom-whitesmoke rounded-2xl grid place-items-center text-center"
+                      className="p-2 bg-custom-whitesmoke rounded-2xl flex flex-col items-center justify-center text-center"
                     >
-                      <item.icon color={service.color} />
+                      <item.icon color={service.color} className=" w-10 h-10" />
                       <p className="text-xs">{item.label}</p>
                     </li>
                   ))}
@@ -220,12 +220,12 @@ function NavMobileComponent() {
                   className="flex items-center gap-3 w-full text-right"
                   disabled={logoutMutation.isPending}
                 >
-                  <item.icon className="p-2 rounded-2xl" color={item.color} />
+                  <item.icon className="p-1.5 rounded-2xl w-10 h-10" color={item.color} />
                   <p className="text-lg">{item.label}</p>
                 </button>
               ) : (
                 <a href={item.to} className="flex items-center gap-3">
-                  <item.icon className="p-2 rounded-2xl" color={item.color} />
+                  <item.icon className="p-1.5 rounded-2xl w-10 h-10" color={item.color} />
                   <p className="text-lg">{item.label}</p>
                 </a>
               )}
